@@ -13,13 +13,11 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23FBF4EC'/><text x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B5451B' text-anchor='middle'>A</text></svg>">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23FBF4EC'/><text x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B5451B' text-anchor='middle'>A</text></svg>">
 
-<!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="capture identify alias people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https://app.posthog.com'});
 </script>
 
-<!-- Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -90,7 +88,7 @@ body { font-family: 'Lora', Georgia, serif; background: var(--creme); color: var
 .form-card-header { background: var(--creme); border-bottom: 1px solid var(--ardosia-light); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
 .form-card-title  { font-size: 11px; font-weight: 600; color: var(--ardosia); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
 .progress-pills   { display: flex; gap: 6px; align-items: center; }
-.prog-pill        { width: 24px; height: 4px; border-radius: 2px; background: var(--ardosia-light); transition: background 0.3s; }
+.prog-pill         { width: 24px; height: 4px; border-radius: 2px; background: var(--ardosia-light); transition: background 0.3s; }
 .prog-pill.active, .prog-pill.done { background: var(--brasa); }
 .form-card-body   { padding: 28px 24px; }
 
@@ -290,7 +288,6 @@ footer a { color: var(--brasa); text-decoration: none; }
       </div>
     </div>
 
-    <!-- FLUXO EMPRESA -->
     <div id="flow-empresa">
       <div class="form-card-body">
 
@@ -320,10 +317,10 @@ footer a { color: var(--brasa); text-decoration: none; }
             <div class="form-group fg-full">
               <label>Regime tributário atual</label>
               <div class="regime-group">
-                <button class="regime-btn" onclick="pickRegime(this,'simples')">Simples Nacional</button>
-                <button class="regime-btn" onclick="pickRegime(this,'presumido')">Lucro Presumido</button>
-                <button class="regime-btn" onclick="pickRegime(this,'real')">Lucro Real</button>
-                <button class="regime-btn" onclick="pickRegime(this,'mei')">MEI</button>
+                <button class="regime-btn" type="button" onclick="pickRegime(this,'simples')">Simples Nacional</button>
+                <button class="regime-btn" type="button" onclick="pickRegime(this,'presumido')">Lucro Presumido</button>
+                <button class="regime-btn" type="button" onclick="pickRegime(this,'real')">Lucro Real</button>
+                <button class="regime-btn" type="button" onclick="pickRegime(this,'mei')">MEI</button>
               </div>
               <span class="regime-error" id="err-regime">Selecione o regime tributário.</span>
             </div>
@@ -346,11 +343,11 @@ footer a { color: var(--brasa); text-decoration: none; }
             <div class="hint">Opcional — torna o diagnóstico mais preciso.</div>
           </div>
 
-          <button class="btn-next" onclick="next1()">Continuar →</button>
+          <button class="btn-next" type="button" onclick="next1()">Continuar →</button>
         </div>
 
         <div class="step" id="s2">
-          <button class="btn-back" onclick="back1()">← Voltar</button>
+          <button class="btn-back" type="button" onclick="back1()">← Voltar</button>
           <div class="step-title">Dados financeiros</div>
           <div class="step-sub">Passo 2 de 2 — valores aproximados já funcionam</div>
           <div class="form-grid">
@@ -392,7 +389,7 @@ footer a { color: var(--brasa); text-decoration: none; }
               <span class="field-hint">Fornecedores do Simples que permanecerem no DAS padrão não geram crédito CBS/IBS — a menos que optem pelo Simples Híbrido (disponível a partir de 2027).</span>
             </div>
           </div>
-          <button class="btn-next brasa" onclick="calcular()">Calcular meu impacto →</button>
+          <button class="btn-next brasa" type="button" onclick="calcular()">Calcular meu impacto →</button>
         </div>
 
         <div class="step" id="s-load">
@@ -415,13 +412,12 @@ footer a { color: var(--brasa); text-decoration: none; }
       </div>
     </div>
 
-    <!-- FLUXO CONTADOR -->
     <div id="flow-contador" style="display:none">
       <div class="form-card-body">
         <div class="step active" id="sc1">
           <div class="contador-note">
             <h3>◈ Ferramenta para escritórios contábeis</h3>
-            <p>Rode diagnósticos para seus clientes, vire referência na Reforma Tributária e mostre o valor do seu advisory antes mesmo de fechar contrato.</p>
+            <p>Rode diagnósticos para seus clientes, vire referência na Reforma Tributária e mostre o value do seu advisory antes mesmo de fechar contrato.</p>
           </div>
           <div class="step-title">Sobre seu escritório</div>
           <div class="step-sub">Acesso antecipado — gratuito</div>
@@ -467,8 +463,8 @@ footer a { color: var(--brasa); text-decoration: none; }
               <div class="chip" onclick="toggleChip(this)">Simulação do split payment</div>
             </div>
           </div>
-          <button class="btn-next brasa" onclick="submeterContador()">Quero acesso antecipado →</button>
-          <button class="btn-back" style="width:100%;margin-top:8px;text-align:center;display:block" onclick="switchPublico('empresa')">
+          <button class="btn-next brasa" type="button" onclick="submeterContador()">Quero acesso antecipado →</button>
+          <button class="btn-back" type="button" style="width:100%;margin-top:8px;text-align:center;display:block" onclick="switchPublico('empresa')">
             Prefiro ver o diagnóstico para empresas
           </button>
         </div>
@@ -478,8 +474,8 @@ footer a { color: var(--brasa); text-decoration: none; }
             <div class="success-box">
               <h3>✓ Registrado com sucesso</h3>
               <p style="margin-top:8px">Você entrou na lista de acesso antecipado para escritórios contábeis.<br><br>
-              Assim que a versão para contadores estiver disponível, você será o primeiro a saber. Enquanto isso, pode usar o diagnóstico para empresas para sentir a experiência do seu cliente.</p>
-              <button class="btn-next" style="margin-top:20px;max-width:320px;margin-left:auto;margin-right:auto" onclick="switchPublico('empresa')">
+               Assim que a versão para contadores estiver disponível, você será o primeiro a saber. Enquanto isso, pode usar o diagnóstico para empresas para sentir a experiência do seu cliente.</p>
+              <button class="btn-next" type="button" style="margin-top:20px;max-width:320px;margin-left:auto;margin-right:auto" onclick="switchPublico('empresa')">
                 Ver diagnóstico para empresas →
               </button>
             </div>
@@ -504,9 +500,8 @@ footer a { color: var(--brasa); text-decoration: none; }
 // Projeta regime pleno (2033+) como referência.
 // ═══════════════════════════════════════════════════════════════════════════
 
-// ── SUBSTITUA PELA URL DO SEU APPS SCRIPT ───────────────────────────────────
-const SHEETS_URL = https://script.google.com/macros/s/AKfycbzByB8D9y-RVwnHXgjoETQVuvTo68oTkQuJpmVDBQTMKeyTCSqiy2uTjjnQfH3BVHLDgg/exec;
-// ─────────────────────────────────────────────────────────────────────────────
+// CORREÇÃO: Adicionadas aspas na URL string para não quebrar a compilação do arquivo.
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzByB8D9y-RVwnHXgjoETQVuvTo68oTkQuJpmVDBQTMKeyTCSqiy2uTjjnQfH3BVHLDgg/exec";
 
 const D = { regime: '', nome: '', setor: '', chips: [], openQ: '' };
 
@@ -556,7 +551,7 @@ function toggleChip(el) {
 }
 
 function pickRegime(el, v) {
-  document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('.regime-group .regime-btn').forEach(b => b.classList.remove('sel'));
   el.classList.add('sel'); D.regime = v;
   document.getElementById('err-regime').classList.remove('visible');
 }
@@ -568,7 +563,7 @@ function setStep(id) {
 function setProg(n) {
   ['pp1','pp2','pp3'].forEach((p, i) => {
     const el = document.getElementById(p);
-    el.className = 'prog-pill' + (i < n ? ' done' : i === n - 1 ? ' active' : '');
+    if(el) el.className = 'prog-pill' + (i < n ? ' done' : i === n - 1 ? ' active' : '');
   });
 }
 function clearErrors() {
@@ -607,7 +602,7 @@ function calcular() {
     document.getElementById('err-fat').textContent = 'MEI tem limite de R$ 81.000/ano (~R$ 6.750/mês). Verifique o regime informado.';
     document.getElementById('err-fat').classList.add('visible'); return;
   }
-  D.fat   = fat;
+  D.fat    = fat;
   D.comp  = parseFloat(document.getElementById('f-comp').value)  || 0;
   D.serv  = parseFloat(document.getElementById('f-serv').value)  || 0;
   D.folha = parseFloat(document.getElementById('f-folha').value) || 0;
@@ -623,6 +618,13 @@ function calcular() {
 function runLoader() {
   const msgs = ['Aplicando alíquotas LC 214/2025...','Calculando créditos CBS/IBS...','Simulando impacto do split payment...','Identificando oportunidades...'];
   const ids  = ['li1','li2','li3','li4'];
+  
+  // Limpa estados de loaders anteriores se o usuário refizer o fluxo
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('done');
+  });
+
   let i = 0;
   const iv = setInterval(() => {
     if (i < ids.length) {
@@ -631,13 +633,15 @@ function runLoader() {
       i++;
     } else {
       clearInterval(iv);
-      ids.forEach(id => document.getElementById(id).classList.add('done'));
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.classList.add('done');
+      });
       setTimeout(() => { buildResults(); setStep('s-res'); }, 400);
     }
   }, 550);
 }
 
-// ── Captura de e-mail — resultado ────────────────────────────────────────────
 function salvarDiagnostico() {
   const email = document.getElementById('res-email').value.trim();
   if (!email || !email.includes('@')) {
@@ -648,8 +652,8 @@ function salvarDiagnostico() {
   const aliq        = ALIQ_SETOR[setor] || ALIQ.CHEIA;
   const isSimplesDAS = regime === 'simples' || regime === 'mei';
   const splitMes    = isSimplesDAS ? 0 : fat * aliq;
-  const fatorForn   = isSimplesDAS ? 0 : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
-  const credMes     = (comp + serv) * fatorForn * aliq;
+  const fForn   = isSimplesDAS ? 0 : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
+  const credMes     = (comp + serv) * fForn * aliq;
   const perdMes     = isSimplesDAS ? fat * 0.30 * ALIQ.CHEIA : credMes * 0.15;
 
   const payload = {
@@ -666,7 +670,7 @@ function salvarDiagnostico() {
     open_q:            openQ,
   };
 
-  if (SHEETS_URL !== 'COLE_SUA_URL_AQUI') {
+  if (SHEETS_URL && SHEETS_URL !== 'COLE_SUA_URL_AQUI') {
     fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' });
   }
   if (typeof posthog !== 'undefined') posthog.capture('empresa_email_capturado', payload);
@@ -677,11 +681,17 @@ function salvarDiagnostico() {
   document.querySelector('.email-row button').disabled = true;
 }
 
-// ── Fluxo contador ────────────────────────────────────────────────────────────
 function submeterContador() {
   const nome  = document.getElementById('c-nome').value.trim();
   const email = document.getElementById('c-email').value.trim();
   let ok = true;
+  
+  // Limpar erros prévios do fluxo do contador
+  document.getElementById('c-nome').classList.remove('field-error');
+  document.getElementById('err-cnome').classList.remove('visible');
+  document.getElementById('c-email').classList.remove('field-error');
+  document.getElementById('err-cemail').classList.remove('visible');
+
   if (!nome)  { document.getElementById('c-nome').classList.add('field-error');  document.getElementById('err-cnome').classList.add('visible');  ok = false; }
   if (!email || !email.includes('@')) { document.getElementById('c-email').classList.add('field-error'); document.getElementById('err-cemail').classList.add('visible'); ok = false; }
   if (!ok) return;
@@ -695,7 +705,7 @@ function submeterContador() {
     chips:       D.chips.join(', '),
   };
 
-  if (SHEETS_URL !== 'COLE_SUA_URL_AQUI') {
+  if (SHEETS_URL && SHEETS_URL !== 'COLE_SUA_URL_AQUI') {
     fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(payload), mode: 'no-cors' });
   }
   if (typeof posthog !== 'undefined') posthog.capture('contador_signup', payload);
@@ -704,7 +714,6 @@ function submeterContador() {
   document.getElementById('sc-ok').classList.add('active');
 }
 
-// ── Motor de cálculo ──────────────────────────────────────────────────────────
 function buildResults() {
   const { fat, comp, serv, folha, regime, forn, setor, nome } = D;
   const aliq        = ALIQ_SETOR[setor] || ALIQ.CHEIA;
@@ -716,16 +725,15 @@ function buildResults() {
   let splitMes = 0;
   if (!isSimplesDAS) splitMes = fat * aliq;
 
-  const fatorForn = isSimplesDAS ? 0
-    : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
-  const credMes = (comp + serv) * fatorForn * aliq;
+  const fForn = isSimplesDAS ? 0 : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
+  const credMes = (comp + serv) * fForn * aliq;
 
   const debitoLiqMes = Math.max(0, splitMes - credMes);
   const saldoCreedor = Math.max(0, credMes - splitMes);
 
   let perdMes = 0;
   if (isSimplesDAS) { perdMes = fat * 0.30 * ALIQ.CHEIA; }
-  else              { perdMes = credMes * 0.15; }
+  else               { perdMes = credMes * 0.15; }
   const perdAno = perdMes * 12;
   const folhaImpacto = folha * aliq;
 
@@ -785,14 +793,14 @@ function buildResults() {
 
   const bars = isSimplesDAS
     ? [
-        { label: 'Perda competitiva B2B/mês', val: perdMes,      cls: 'bf-red'  },
+        { label: 'Perda competitiva B2B/mês', val: perdMes,   cls: 'bf-red'  },
         { label: 'CBS/IBS sobre folha',        val: folhaImpacto, cls: 'bf-blue' },
       ]
     : [
         { label: 'Retido pelo split payment', val: splitMes,      cls: 'bf-red'   },
         { label: 'Crédito recuperável / mês', val: credMes,       cls: 'bf-green' },
         { label: 'Débito líquido / mês',      val: debitoLiqMes,  cls: 'bf-amber' },
-        { label: 'CBS/IBS s/ folha\n(sem crédito)', val: folhaImpacto, cls: 'bf-blue' },
+        { label: 'CBS/IBS s/ folha<br>(sem crédito)', val: folhaImpacto, cls: 'bf-blue' },
       ];
   const maxB = Math.max(...bars.map(b => b.val), 1);
 
@@ -842,7 +850,7 @@ function buildResults() {
     : `<div class="next-steps"><div class="next-steps-title">O que fazer agora</div>
         <div class="next-step-item"><div class="next-step-num">1</div><div class="next-step-text"><strong>Audite as NF-es dos últimos 3 meses.</strong> Verifique se CBS 0,9% e IBS 0,1% estão destacados corretamente. ${isLucroReal ? 'Para Lucro Real, confira também o CIAP para créditos de ativo imobilizado.' : 'Para Lucro Presumido, confirme se o regime de crédito está corretamente configurado.'}</div></div>
         <div class="next-step-item"><div class="next-step-num">2</div><div class="next-step-text"><strong>Prepare o caixa para o split payment.</strong> Ativo desde maio/2026: o CBS/IBS é retido na liquidação (Pix, boleto, TED). Se não estava previsto no fluxo de caixa, ajuste agora.</div></div>
-        <div class="next-step-item"><div class="next-step-num">3</div><div class="next-step-text"><strong>Parametrize o ERP para as alíquotas corretas.</strong> Qualquer emissor de NF-e precisa ter CBS e IBS configurados por NCM/serviço.</div></div>
+        <div class="next-step-item"><div class="next-step-num">3</div><div class="next-step-text"><strong>Parametrize o ERP para as alíquotas correctes.</strong> Qualquer emissor de NF-e precisa ter CBS e IBS configurados por NCM/serviço.</div></div>
         <div class="next-step-item"><div class="next-step-num">4</div><div class="next-step-text"><strong>Consulte a <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm" target="_blank" rel="noopener" style="color:var(--brasa)">LC 214/2025</a> com seu contador</strong> para confirmar a alíquota exata e regimes especiais do seu setor.</div></div>
       </div>`;
 
@@ -855,7 +863,7 @@ function buildResults() {
     <div class="section-label">Detalhamento do fluxo CBS/IBS</div>
     ${bars.map(b => `
       <div class="bar-row">
-        <div class="bar-name">${b.label.replace('\n','<br>')}</div>
+        <div class="bar-name">${b.label}</div>
         <div class="bar-track"><div class="bar-fill ${b.cls}" style="width:${Math.max(5, Math.round(b.val / maxB * 100))}%">${brl(b.val)}</div></div>
       </div>`).join('')}
     <hr class="divider">
