@@ -594,34 +594,34 @@ function buildResults() {
 
   if (isSimples) {
     insights.push({
-      ico:'⇄', title:'Avalie o Simples Híbrido a partir de 2027', tag:'urgente', tagCls:'tag-red',
+      ico:'⇄', title:'Avalie o Simples Híbrido a partir de 2027', tag:'Avaliar mudança de regime', tagCls:'tag-red',
       text:`A LC 214/2025 criou o Simples Híbrido: recolher IBS/CBS fora do DAS, gerando crédito integral para clientes B2B. Se mais de 30% das suas vendas são para empresas do regime regular, a análise é obrigatória. A decisão é semestral e irrevogável.`,
     });
   }
 
   if (!isSimplesDAS && forn === 'simples') {
     insights.push({
-      ico:'🔗', title:'Renegocie com fornecedores do Simples', tag:'ação', tagCls:'tag-amber',
+      ico:'🔗', title:'Renegocie com fornecedores do Simples', tag:'Prioridade', tagCls:'tag-amber',
       text:`Seus fornecedores do Simples não geram crédito CBS/IBS. Migrar compras para o regime regular pode recuperar até ${brl((comp + serv) * 0.65 * aliq)}/mês. Priorize os maiores fornecedores.`,
     });
   }
 
   if (!isSimplesDAS) {
     insights.push({
-      ico:'📄', title:'Parametrize CBS/IBS no ERP agora', tag:'técnico', tagCls:'tag-blue',
+      ico:'📄', title:'Parametrize CBS/IBS no ERP agora', tag:'Ajuste no sistema (ERP)', tagCls:'tag-blue',
       text:`Desde jan/2026, NFs devem destacar CBS/IBS (alíquotas-teste). Sem parametrização correta, cada NF com campo errado cancela o crédito daquela operação a partir de 2027. Audite os últimos 3 meses de emissão.`,
     });
   }
 
   if (!isSimplesDAS && saldoCreedor > 0) {
     insights.push({
-      ico:'💰', title:'Você tem saldo credor potencial', tag:'oportunidade', tagCls:'tag-blue',
+      ico:'💰', title:'Você tem saldo credor potencial', tag:'Dinheiro a recuperar', tagCls:'tag-blue',
       text:`Seu crédito recuperável (${brl(credMes)}/mês) supera o split retido (${brl(splitMes)}/mês). Isso gera saldo credor de ${brl(saldoCreedor)}/mês — que pode ser ressarcido ou compensado com outros tributos. Garanta que os processos de recuperação estejam ativos.`,
     });
   }
 
   insights.push({
-    ico:'📋', title:'Auditoria preventiva de NFs', tag:'ação', tagCls:'tag-amber',
+    ico:'📋', title:'Auditoria preventiva de NFs', tag:'Prioridade', tagCls:'tag-amber',
     text:`95% das PMEs cometem erros na apuração (IBPT). Com o split payment em 2027, NFs incorretas significam créditos perdidos e caixa retido aguardando ressarcimento, que pode levar meses. Uma auditoria agora evita o acúmulo.`,
   });
 
