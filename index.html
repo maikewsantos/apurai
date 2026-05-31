@@ -321,9 +321,61 @@ posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https
 </footer>
 
 <script>
+// ─────────────────────────────────────────────────────────────────────────────
+// APURAI — Memória de cálculo fiscal
+// Base legal: LC 214/2025 (EC 132/2023), Decreto 12.955/2026
+// Alíquotas vigentes a partir de 2027 (2026 = fase-teste sem recolhimento)
+// ─────────────────────────────────────────────────────────────────────────────
+
 const D = { regime: '', nome: '', setor: '' };
-const SETOR_LABEL = { construcao:'Construção civil', transporte:'Transporte e logística', saude:'Saúde', comercio:'Comércio varejista', servicos:'Serviços', industria:'Indústria', agro:'Agronegócio' };
-const REG_LABEL   = { simples:'Simples Nacional', presumido:'Lucro Presumido', real:'Lucro Real', mei:'MEI' };
+
+const SETOR_LABEL = {
+  construcao: 'Construção civil',
+  transporte:  'Transporte e logística',
+  saude:       'Saúde',
+  comercio:    'Comércio varejista',
+  servicos:    'Serviços em geral',
+  industria:   'Indústria',
+  agro:        'Agronegócio',
+};
+const REG_LABEL = {
+  simples:   'Simples Nacional',
+  presumido: 'Lucro Presumido',
+  real:      'Lucro Real',
+  mei:       'MEI',
+};
+
+// ── Alíquotas LC 214/2025 ────────────────────────────────────────────────────
+// Alíquota de referência 2027+: CBS 8,8% + IBS 17,7% = 26,5% (art. 12 e 125)
+// Redução 60% (arts. 82–86 e 128–138): saúde, agro → 26,5% × 40% = 10,6%
+// Redução 30% (art. 127): serviços intelectuais regulamentados → 26,5% × 70% = 18,55%
+// 2026: alíquotas-teste 0,9% CBS + 0,1% IBS = 1%, sem recolhimento efetivo (art. 348)
+
+const ALIQ = {
+  CHEIA:  0.265,   // regime geral (comércio, indústria, serviços sem redução)
+  RED60:  0.106,   // redução 60% — saúde, agro (arts. 82, 128, 138)
+  RED30:  0.1855,  // redução 30% — serviços intelectuais regulamentados (art. 127)
+  TESTE:  0.010,   // alíquota-teste 2026 — apenas informativa, sem recolhimento
+};
+
+// Mapeamento setor → alíquota 2027+
+// "servicos" inclui construção civil (sem enquadramento especial) e serviços gerais
+// "construcao" = serviços técnicos de engenharia → redução 30% (art. 127, inciso XI)
+// Nota: a redução 30% de construção só vale para empresas compostas por engenheiros
+// habilitados; aqui usamos como estimativa conservadora para o setor.
+const ALIQ_SETOR = {
+  saude:      ALIQ.RED60,  // arts. 128–131 LC 214/2025
+  agro:       ALIQ.RED60,  // art. 138 e Anexo IX LC 214/2025
+  construcao: ALIQ.RED30,  // art. 127 (XI) — engenheiros; estimativa conservadora
+  transporte: ALIQ.CHEIA,  // sem redução específica prevista
+  comercio:   ALIQ.CHEIA,
+  servicos:   ALIQ.CHEIA,
+  industria:  ALIQ.CHEIA,
+};
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function brl(n)  { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+function pct(n)  { return (n * 100).toFixed(1).replace('.', ',') + '%'; }
 
 function pickRegime(el, v) {
   document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('sel'));
@@ -335,39 +387,63 @@ function setStep(id) {
   document.getElementById(id).classList.add('active');
 }
 function setProg(n) {
-  ['pp1','pp2','pp3'].forEach((p,i) => {
+  ['pp1','pp2','pp3'].forEach((p, i) => {
     const el = document.getElementById(p);
-    el.className = 'prog-pill' + (i < n ? ' done' : i === n-1 ? ' active' : '');
+    el.className = 'prog-pill' + (i < n ? ' done' : i === n - 1 ? ' active' : '');
   });
 }
+
+// ── Navegação do formulário ──────────────────────────────────────────────────
 function next1() {
-  D.nome = document.getElementById('f-nome').value.trim();
-  D.setor = document.getElementById('f-setor').value;
-  if (!D.nome || !D.setor || !D.regime) { alert('Preencha todos os campos para continuar.'); return; }
+  D.nome   = document.getElementById('f-nome').value.trim();
+  D.setor  = document.getElementById('f-setor').value;
+  if (!D.nome || !D.setor || !D.regime) {
+    alert('Preencha todos os campos para continuar.');
+    return;
+  }
   setStep('s2'); setProg(2);
   if (typeof posthog !== 'undefined') posthog.capture('step1_completed', { regime: D.regime, setor: D.setor });
 }
 function back1() { setStep('s1'); setProg(1); }
+
 function calcular() {
   const fat = parseFloat(document.getElementById('f-fat').value);
   if (!fat || fat <= 0) { alert('Informe o faturamento mensal.'); return; }
-  D.fat  = fat;
-  D.comp = parseFloat(document.getElementById('f-comp').value)  || 0;
-  D.serv = parseFloat(document.getElementById('f-serv').value)  || 0;
-  D.folha= parseFloat(document.getElementById('f-folha').value) || 0;
-  D.forn = document.getElementById('f-forn').value;
-  if (typeof posthog !== 'undefined') posthog.capture('step2_completed', { faixa: fat < 50000 ? '<50k' : fat < 200000 ? '50-200k' : '>200k' });
+
+  // Validação MEI: limite legal R$ 81.000/ano ≈ R$ 6.750/mês
+  if (D.regime === 'mei' && fat > 6750) {
+    alert('O MEI tem limite de faturamento de R$ 81.000/ano (~R$ 6.750/mês). Verifique o regime tributário informado.');
+    return;
+  }
+
+  D.fat   = fat;
+  D.comp  = parseFloat(document.getElementById('f-comp').value)  || 0;
+  D.serv  = parseFloat(document.getElementById('f-serv').value)  || 0;
+  D.folha = parseFloat(document.getElementById('f-folha').value) || 0;
+  D.forn  = document.getElementById('f-forn').value;
+
+  if (typeof posthog !== 'undefined') posthog.capture('step2_completed', {
+    regime: D.regime, setor: D.setor,
+    faixa:  fat < 50000 ? '<50k' : fat < 200000 ? '50-200k' : '>200k',
+  });
+
   setStep('s-load'); setProg(3);
   runLoader();
 }
+
 function runLoader() {
-  const msgs = ['Calculando créditos CBS/IBS...','Simulando split payment...','Comparando benchmark setorial...','Mapeando oportunidades...'];
-  const ids  = ['li1','li2','li3','li4'];
+  const msgs = [
+    'Aplicando alíquotas LC 214/2025...',
+    'Calculando créditos CBS/IBS...',
+    'Simulando split payment 2027...',
+    'Identificando oportunidades...',
+  ];
+  const ids = ['li1','li2','li3','li4'];
   let i = 0;
   const iv = setInterval(() => {
     if (i < ids.length) {
       document.getElementById('load-txt').textContent = msgs[i];
-      if (i > 0) document.getElementById(ids[i-1]).classList.add('done');
+      if (i > 0) document.getElementById(ids[i - 1]).classList.add('done');
       i++;
     } else {
       clearInterval(iv);
@@ -376,60 +452,261 @@ function runLoader() {
     }
   }, 550);
 }
-function brl(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+
+// ── Motor de cálculo principal ───────────────────────────────────────────────
 function buildResults() {
   const { fat, comp, serv, folha, regime, forn, setor, nome } = D;
-  const ALIQ = 0.265;
-  const splitMes = fat * ALIQ;
-  let cfac = forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65;
-  const credMes  = (comp + serv) * cfac * ALIQ;
-  const perdMes  = (regime === 'simples' || regime === 'mei') ? credMes * 0.7 : fat * ALIQ * 0.12;
-  const perdAno  = perdMes * 12;
-  if (typeof posthog !== 'undefined') posthog.capture('results_shown', { regime, setor, faixa: fat < 50000 ? '<50k' : fat < 200000 ? '50-200k' : '>200k', perd_ano_brl: Math.round(perdAno) });
-  const alertHTML = (regime === 'simples' || regime === 'mei') ? `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div><b>${REG_LABEL[regime]}:</b> você não gera créditos de IBS/CBS para seus clientes corporativos. Isso pode reduzir sua competitividade em cadeias produtivas.</div></div>` : '';
-  const maxB = Math.max(splitMes, credMes, perdMes, folha * ALIQ, 1);
-  const bars = [
-    { label:'Retido pelo split payment', val: splitMes, cls:'bf-red' },
-    { label:'Crédito potencial',         val: credMes,  cls:'bf-green' },
-    { label:'Crédito perdido / mês',     val: perdMes,  cls:'bf-amber' },
-    { label:'Folha (sem crédito CBS)',   val: folha * ALIQ, cls:'bf-blue' },
-  ];
+
+  // 1. Alíquota efetiva do setor (2027+)
+  const aliq = ALIQ_SETOR[setor] || ALIQ.CHEIA;
+
+  // 2. Classificação do regime
+  const isMEI     = regime === 'mei';
+  const isSimples = regime === 'simples';
+  const isSimplesDAS = isSimples || isMEI; // ambos recolhem via guia própria, sem CBS/IBS destacado
+
+  // ── Bloco Simples Nacional / MEI ──────────────────────────────────────────
+  // Art. 41, LC 214/2025: optantes pelo Simples recolhem via DAS.
+  // No DAS padrão (não-híbrido): IBS/CBS estão embutidos, sem destaque para o comprador.
+  // → Compradores do regime regular NÃO recuperam crédito CBS/IBS nas compras de empresas do Simples.
+  // → Empresa do Simples NÃO está sujeita ao split payment no modelo B2B (fase 1, 2027).
+  // MEI: permanece no SIMEI com guia fixa; isento de CBS/IBS nos termos da LC 214/2025.
+  // Simples Híbrido (opcional a partir de 2027): recolhe IBS/CBS fora do DAS → gera crédito,
+  //   mas sujeito ao split payment. Não calculamos o híbrido aqui por ora.
+
+  // 3. Split payment (arts. 32–36 LC 214/2025; Decreto 12.955/2026)
+  // Fase 1 (2027, voluntária, B2B): Pix, boleto, TED/TEF — apenas regime regular
+  // MEI e Simples DAS: NÃO sujeitos ao split na fase 1
+  // Lucro Presumido/Real: split retém CBS+IBS sobre o valor recebido
+  let splitMes = 0;
+  if (!isSimplesDAS) {
+    splitMes = fat * aliq;
+  }
+  // Nota explicativa para o usuário caso seja Simples/MEI
+  const splitNota = isSimplesDAS
+    ? 'Não se aplica ao regime DAS (Simples/MEI na fase 1 do split payment)'
+    : `${pct(aliq)} do faturamento retido na liquidação (Pix/boleto/TED) — vigente a partir de 2027`;
+
+  // 4. Crédito CBS/IBS sobre entradas (não cumulatividade — arts. 46–57 LC 214/2025)
+  // Gera crédito: compras de insumos + serviços de fornecedores do regime regular
+  // Não gera crédito: folha de pagamento (art. 47), fornecedores do Simples DAS
+  // Fator por perfil de fornecedor:
+  //   Maioria Lucro Real/Presumido → 100% das entradas geram crédito integral
+  //   Misto                        → 65% (estimativa: mix de fornecedores)
+  //   Maioria Simples Nacional      → 35% (Simples não destaca CBS/IBS)
+  // Simples/MEI no DAS padrão: NÃO aproveitam crédito (não são contribuintes do regime regular)
+  const fatorForn = isSimplesDAS
+    ? 0
+    : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
+  const credMes = (comp + serv) * fatorForn * aliq;
+
+  // 5. Débito líquido mensal
+  // Para Lucro Real/Presumido: split retido menos crédito apurado no período
+  // Crédito pode zerar ou inverter o débito (gerar saldo credor a ressarcir)
+  const debitoLiqMes = Math.max(0, splitMes - credMes);
+  const saldoCreedor = Math.max(0, credMes - splitMes); // saldo a recuperar/ressarcir
+
+  // 6. Estimativa de perda anual
+  // Lucro Real/Presumido: 15% do crédito potencial perdido por erros de NF/ERP (benchmark IBPT)
+  // Simples DAS: perda competitiva B2B — compradores do regime regular perdem crédito
+  //   Estimativa conservadora: 30% das vendas vão para PJ regime regular
+  //   Esses compradores perdem 26,5% do valor pago como crédito irrecuperável
+  let perdMes = 0;
+  if (isSimplesDAS) {
+    // Perda competitiva: o cliente corporativo não recupera CBS/IBS → pressão de preço
+    perdMes = fat * 0.30 * ALIQ.CHEIA; // 30% das vendas B2B × alíquota cheia do comprador
+  } else {
+    perdMes = credMes * 0.15; // 15% do crédito potencial perdido por erros
+  }
+  const perdAno = perdMes * 12;
+
+  // 7. Folha: impacto CBS/IBS indireto
+  // A folha não gera crédito → custo oculto: cada R$1 de folha carrega ~26,5% de CBS/IBS
+  //   nas vendas sem contrapartida de crédito
+  const folhaImpacto = folha * aliq; // custo CBS/IBS embutido nas vendas que a folha "consome"
+
+  // ── Alertas ───────────────────────────────────────────────────────────────
+  let alertas = '';
+
+  // Aviso universal: diagnóstico é prospectivo (2027+)
+  alertas += `<div class="alert alert-warn" style="margin-bottom:16px">
+    <span class="alert-icon">📅</span>
+    <div style="font-size:12px">
+      <b>Diagnóstico projetado para 2027+</b> — quando CBS e IBS entram em vigor pleno (CBS 8,8% + IBS 17,7% = 26,5%).
+      Em 2026, as alíquotas-teste são de 1% sem recolhimento efetivo (art. 348 LC 214/2025).
+    </div>
+  </div>`;
+
+  if (isMEI) {
+    alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
+      <b>MEI:</b> você permanece no SIMEI com guia fixa e está isento de CBS/IBS nos termos da LC 214/2025.
+      Porém, suas notas <b>não geram crédito</b> para clientes corporativos — o que pode reduzir sua competitividade em vendas B2B.
+    </div></div>`;
+  } else if (isSimples) {
+    alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
+      <b>Simples Nacional (DAS padrão):</b> suas notas <b>não destacam CBS/IBS</b> para o comprador.
+      Clientes do Lucro Real/Presumido não recuperam crédito ao comprar de você — pressão competitiva crescente a partir de 2027.
+      <br><br>A LC 214/2025 prevê o <b>Simples Híbrido</b> (opcional a partir de 2027): recolher IBS/CBS fora do DAS para gerar crédito integral aos clientes. Consulte seu contador.
+    </div></div>`;
+  } else if (forn === 'simples') {
+    alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
+      <b>Atenção:</b> a maioria dos seus fornecedores é do Simples Nacional.
+      Eles não destacam CBS/IBS nas NFs — você <b>não recupera crédito</b> dessas compras.
+      Migrar fornecedores para o regime regular pode recuperar até <b>${brl((comp + serv) * 0.65 * aliq)}/mês</b> em créditos.
+    </div></div>`;
+  }
+
+  if (aliq === ALIQ.RED60) {
+    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:16px">
+      <span class="alert-icon">✓</span>
+      <div style="font-size:12px">
+        <b>Alíquota reduzida 60%:</b> seu setor (${SETOR_LABEL[setor]}) tem alíquota efetiva de ${pct(aliq)} em vez de ${pct(ALIQ.CHEIA)}.
+        Garanta que o código CBS/IBS correto esteja parametrizado nas NFs para manter o benefício (arts. 82–138 LC 214/2025).
+      </div>
+    </div>`;
+  } else if (aliq === ALIQ.RED30) {
+    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:16px">
+      <span class="alert-icon">✓</span>
+      <div style="font-size:12px">
+        <b>Alíquota reduzida 30%:</b> ${SETOR_LABEL[setor]} pode ter alíquota efetiva de ${pct(aliq)} se a empresa for composta por profissionais habilitados exercendo exclusivamente a atividade do conselho (art. 127 LC 214/2025).
+        Verifique o enquadramento com seu contador.
+      </div>
+    </div>`;
+  }
+
+  // ── Barras ────────────────────────────────────────────────────────────────
+  const bars = isSimplesDAS
+    ? [
+        { label: 'Perda competitiva B2B/mês', val: perdMes,     cls: 'bf-red'   },
+        { label: 'Folha (custo oculto CBS)',   val: folhaImpacto,cls: 'bf-blue'  },
+      ]
+    : [
+        { label: 'Retido pelo split payment',  val: splitMes,     cls: 'bf-red'   },
+        { label: 'Crédito recuperável / mês',  val: credMes,      cls: 'bf-green' },
+        { label: 'Débito líquido / mês',       val: debitoLiqMes, cls: 'bf-amber' },
+        { label: 'Folha (não gera crédito)',   val: folhaImpacto, cls: 'bf-blue'  },
+      ];
+
+  const maxB = Math.max(...bars.map(b => b.val), 1);
+
+  // ── Insights ──────────────────────────────────────────────────────────────
   const insights = [];
-  if (regime === 'simples' || regime === 'mei') insights.push({ ico:'⇄', title:'Avalie migrar de regime', tag:'urgente', tagCls:'tag-red', text:`No ${REG_LABEL[regime]} você não gera crédito para clientes corporativos. Migrar para Lucro Presumido pode recuperar ${brl(credMes)}/mês em competitividade.` });
-  if (forn === 'simples') insights.push({ ico:'🔗', title:'Mapeie seus fornecedores', tag:'ação', tagCls:'tag-amber', text:`Fornecedores do Simples não geram crédito para você. Negociar com fornecedores do Lucro pode recuperar até ${brl(credMes * 0.65)}/mês.` });
-  insights.push({ ico:'📄', title:'Audite as NFs dos últimos 3 meses', tag:'ação', tagCls:'tag-amber', text:`95% das PMEs cometem erros na apuração. Cada NF com campo CBS/IBS incorreto é crédito perdido. Uma auditoria agora evita acúmulo até 2027.` });
-  insights.push({ ico:'⚙', title:'Parametrize seu ERP para CBS/IBS', tag:'técnico', tagCls:'tag-blue', text:`Sem parametrização, cada NF emitida pode gerar erro que cancela o crédito daquela operação.` });
+
+  if (isSimples) {
+    insights.push({
+      ico:'⇄', title:'Avalie o Simples Híbrido a partir de 2027', tag:'urgente', tagCls:'tag-red',
+      text:`A LC 214/2025 criou o Simples Híbrido: recolher IBS/CBS fora do DAS, gerando crédito integral para clientes B2B. Se mais de 30% das suas vendas são para empresas do regime regular, a análise é obrigatória. A decisão é semestral e irrevogável.`,
+    });
+  }
+
+  if (!isSimplesDAS && forn === 'simples') {
+    insights.push({
+      ico:'🔗', title:'Renegocie com fornecedores do Simples', tag:'ação', tagCls:'tag-amber',
+      text:`Seus fornecedores do Simples não geram crédito CBS/IBS. Migrar compras para o regime regular pode recuperar até ${brl((comp + serv) * 0.65 * aliq)}/mês. Priorize os maiores fornecedores.`,
+    });
+  }
+
+  if (!isSimplesDAS) {
+    insights.push({
+      ico:'📄', title:'Parametrize CBS/IBS no ERP agora', tag:'técnico', tagCls:'tag-blue',
+      text:`Desde jan/2026, NFs devem destacar CBS/IBS (alíquotas-teste). Sem parametrização correta, cada NF com campo errado cancela o crédito daquela operação a partir de 2027. Audite os últimos 3 meses de emissão.`,
+    });
+  }
+
+  if (!isSimplesDAS && saldoCreedor > 0) {
+    insights.push({
+      ico:'💰', title:'Você tem saldo credor potencial', tag:'oportunidade', tagCls:'tag-blue',
+      text:`Seu crédito recuperável (${brl(credMes)}/mês) supera o split retido (${brl(splitMes)}/mês). Isso gera saldo credor de ${brl(saldoCreedor)}/mês — que pode ser ressarcido ou compensado com outros tributos. Garanta que os processos de recuperação estejam ativos.`,
+    });
+  }
+
+  insights.push({
+    ico:'📋', title:'Auditoria preventiva de NFs', tag:'ação', tagCls:'tag-amber',
+    text:`95% das PMEs cometem erros na apuração (IBPT). Com o split payment em 2027, NFs incorretas significam créditos perdidos e caixa retido aguardando ressarcimento, que pode levar meses. Uma auditoria agora evita o acúmulo.`,
+  });
+
+  // ── KPIs ──────────────────────────────────────────────────────────────────
+  const kpiHtml = isSimplesDAS
+    ? `<div class="kpi-grid">
+        <div class="kpi danger">
+          <div class="kpi-label">Perda competitiva B2B / mês</div>
+          <div class="kpi-value">${brl(perdMes)}</div>
+          <div class="kpi-sub">Crédito que seus clientes corporativos deixam de recuperar</div>
+        </div>
+        <div class="kpi warning">
+          <div class="kpi-label">Perda competitiva / ano</div>
+          <div class="kpi-value">${brl(perdAno)}</div>
+          <div class="kpi-sub">Pressão acumulada sobre preços e contratos B2B</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Alíquota efetiva no regime regular</div>
+          <div class="kpi-value">${pct(aliq)}</div>
+          <div class="kpi-sub">Referência se migrar para Lucro ou Simples Híbrido</div>
+        </div>
+      </div>`
+    : `<div class="kpi-grid">
+        <div class="kpi danger">
+          <div class="kpi-label">Retido pelo split / mês</div>
+          <div class="kpi-value">${brl(splitMes)}</div>
+          <div class="kpi-sub">${pct(aliq)} do faturamento retido antes de chegar ao caixa</div>
+        </div>
+        <div class="kpi success">
+          <div class="kpi-label">Crédito recuperável / mês</div>
+          <div class="kpi-value">${brl(credMes)}</div>
+          <div class="kpi-sub">${isSimplesDAS ? 'Não disponível no DAS' : 'Se NFs e ERP estiverem corretos'}</div>
+        </div>
+        <div class="kpi warning">
+          <div class="kpi-label">Crédito perdido / ano</div>
+          <div class="kpi-value">${brl(perdAno)}</div>
+          <div class="kpi-sub">Por erros em NFs, ERP não parametrizado ou regime de fornecedor</div>
+        </div>
+      </div>`;
+
+  // ── Render final ──────────────────────────────────────────────────────────
   document.getElementById('results-body').innerHTML = `
     <div class="company-tag">🏢 ${nome} · ${SETOR_LABEL[setor]||setor} · ${REG_LABEL[regime]||regime}</div>
-    ${alertHTML}
-    <div class="section-label">Impacto mensal estimado</div>
-    <div class="kpi-grid">
-      <div class="kpi danger"><div class="kpi-label">Retido pelo split payment</div><div class="kpi-value">${brl(splitMes)}</div><div class="kpi-sub">Sai antes de chegar ao seu caixa</div></div>
-      <div class="kpi success"><div class="kpi-label">Crédito a capturar</div><div class="kpi-value">${brl(credMes)}</div><div class="kpi-sub">Se documentos estiverem corretos</div></div>
-      <div class="kpi warning"><div class="kpi-label">Crédito perdido / ano</div><div class="kpi-value">${brl(perdAno)}</div><div class="kpi-sub">Por erros de NF, ERP ou regime</div></div>
-    </div>
+    ${alertas}
+    <div class="section-label">Impacto estimado a partir de 2027</div>
+    ${kpiHtml}
     <hr class="divider">
-    <div class="section-label">Detalhamento</div>
-    ${bars.map(b => `<div class="bar-row"><div class="bar-name">${b.label}</div><div class="bar-track"><div class="bar-fill ${b.cls}" style="width:${Math.max(5,Math.round(b.val/maxB*100))}%">${brl(b.val)}</div></div></div>`).join('')}
+    <div class="section-label">Detalhamento do fluxo CBS/IBS</div>
+    ${bars.map(b => `
+      <div class="bar-row">
+        <div class="bar-name">${b.label}</div>
+        <div class="bar-track">
+          <div class="bar-fill ${b.cls}" style="width:${Math.max(5, Math.round(b.val / maxB * 100))}%">${brl(b.val)}</div>
+        </div>
+      </div>`).join('')}
     <hr class="divider">
     <div class="section-label">Recomendações prioritárias</div>
-    ${insights.map(ins => `<div class="insight"><span class="insight-ico">${ins.ico}</span><div><div class="insight-title">${ins.title}<span class="tag ${ins.tagCls}">${ins.tag}</span></div><div class="insight-text">${ins.text}</div></div></div>`).join('')}
+    ${insights.map(ins => `
+      <div class="insight">
+        <span class="insight-ico">${ins.ico}</span>
+        <div>
+          <div class="insight-title">${ins.title}<span class="tag ${ins.tagCls}">${ins.tag}</span></div>
+          <div class="insight-text">${ins.text}</div>
+        </div>
+      </div>`).join('')}
     <div class="cta-box">
       <h3>Quer recuperar esses créditos?</h3>
-      <p>Conecte seu ERP ou envie os XMLs das suas NF-es para um diagnóstico completo — e veja exatamente quais documentos corrigir primeiro.</p>
+      <p>Conecte seu ERP ou envie os XMLs das suas NF-es para um diagnóstico completo — e veja exatamente quais documentos corrigir antes de 2027.</p>
       <div class="cta-btns">
         <button class="btn-cta-p" onclick="trackCTA('erp')">Conectar ERP →</button>
         <button class="btn-cta-s" onclick="trackCTA('email')">Receber relatório por e-mail</button>
       </div>
     </div>`;
 }
+
 function trackCTA(type) {
   if (typeof posthog !== 'undefined') posthog.capture('cta_clicked', { type });
-  alert(type === 'erp' ? 'Em breve! Deixe seu e-mail e avisamos quando a integração estiver disponível.' : 'Em breve! Cadastre seu e-mail para receber o relatório completo.');
+  alert(type === 'erp'
+    ? 'Em breve! Deixe seu e-mail e avisamos quando a integração estiver disponível.'
+    : 'Em breve! Cadastre seu e-mail para receber o relatório completo.');
 }
+
 document.querySelector('.hero-cta').addEventListener('click', function(e) {
   e.preventDefault();
-  document.getElementById('diagnostico').scrollIntoView({ behavior:'smooth' });
+  document.getElementById('diagnostico').scrollIntoView({ behavior: 'smooth' });
   if (typeof posthog !== 'undefined') posthog.capture('hero_cta_clicked');
 });
 </script>
