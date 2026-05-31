@@ -11,11 +11,13 @@
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 
+<!-- PostHog -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="capture identify alias people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https://app.posthog.com'});
 </script>
 
+<!-- Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -24,195 +26,246 @@ posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https
     })(window, document, "clarity", "script", "wzwx8w7y8n");
 </script>
 
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --brasa: #B5451B;
-    --brasa-light: #F5E6DF;
-    --espresso: #2C1A0E;
-    --creme: #FBF4EC;
-    --ouro: #C8922A;
-    --ouro-light: #FDF3DC;
-    --ardosia: #7A6A5E;
-    --ardosia-light: #EDE6DF;
-    --ink: var(--espresso);
-    --ink-60: var(--ardosia);
-    --ink-30: #B5A89E;
-    --ink-10: var(--ardosia-light);
-    --ink-05: var(--creme);
-    --white: #FFFFFF;
-    --accent: var(--brasa);
-    --accent-light: var(--brasa-light);
-    --danger: #B5451B;
-    --danger-light: #F5E6DF;
-    --warning: var(--ouro);
-    --warning-light: var(--ouro-light);
-    --success: #2E6B2E;
-    --success-light: #E8F5E8;
-    --radius: 10px;
-    --radius-lg: 16px;
-    --shadow: 0 1px 3px rgba(44,26,14,0.08), 0 1px 2px rgba(44,26,14,0.04);
-    --shadow-md: 0 4px 16px rgba(44,26,14,0.10);
-  }
-
-  html { font-size: 16px; }
-  body { font-family: 'Lora', Georgia, serif; background: var(--creme); color: var(--espresso); line-height: 1.6; min-height: 100vh; }
-
-  .hero { background: var(--espresso); color: var(--creme); padding: 80px 24px 72px; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; border-radius: 50%; background: rgba(181,69,27,0.18); pointer-events: none; }
-  .hero::after { content: ''; position: absolute; bottom: -60px; left: 20%; width: 220px; height: 220px; border-radius: 50%; background: rgba(200,146,42,0.12); pointer-events: none; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(251,244,236,0.1); border: 1px solid rgba(251,244,236,0.2); border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 28px; color: rgba(251,244,236,0.7); font-family: 'DM Sans', sans-serif; }
-  .hero-badge span { color: var(--ouro); }
-  .hero h1 { font-size: clamp(36px, 6vw, 60px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; color: var(--creme); }
-  .hero h1 em { font-style: italic; color: var(--ouro); }
-  .hero p { font-size: clamp(16px, 2.5vw, 20px); color: rgba(251,244,236,0.65); max-width: 560px; margin: 0 auto 40px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
-  .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 48px; }
-  .hero-stat-val { font-size: 32px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; color: var(--creme); }
-  .hero-stat-label { font-size: 12px; color: rgba(251,244,236,0.5); line-height: 1.3; max-width: 120px; margin: 0 auto; font-family: 'DM Sans', sans-serif; }
-  .hero-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--brasa); color: var(--creme); font-weight: 600; font-size: 16px; padding: 14px 32px; border-radius: var(--radius); border: none; cursor: pointer; text-decoration: none; transition: transform 0.15s, opacity 0.15s; font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em; }
-  .hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-  .hero-cta-sub { margin-top: 12px; font-size: 12px; color: rgba(251,244,236,0.4); font-family: 'DM Sans', sans-serif; }
-
-  .form-wrapper { max-width: 600px; margin: -32px auto 0; padding: 0 16px 80px; }
-  .form-card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; border: 1px solid var(--ardosia-light); }
-  .form-card-header { background: var(--creme); border-bottom: 1px solid var(--ardosia-light); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-  .form-card-title { font-size: 11px; font-weight: 600; color: var(--ardosia); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
-  .progress-pills { display: flex; gap: 6px; align-items: center; }
-  .prog-pill { width: 24px; height: 4px; border-radius: 2px; background: var(--ardosia-light); transition: background 0.3s; }
-  .prog-pill.active, .prog-pill.done { background: var(--brasa); }
-  .form-card-body { padding: 28px 24px; }
-
-  .step { display: none; }
-  .step.active { display: block; }
-
-  .step-title { font-size: 20px; font-weight: 400; margin-bottom: 4px; letter-spacing: -0.01em; color: var(--espresso); font-family: 'Lora', serif; }
-  .step-sub { font-size: 14px; color: var(--ardosia); margin-bottom: 24px; font-family: 'DM Sans', sans-serif; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .fg-full { grid-column: 1 / -1; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  label { font-size: 13px; font-weight: 600; color: var(--espresso); font-family: 'DM Sans', sans-serif; }
-  input, select { font-family: 'DM Sans', sans-serif; font-size: 15px; border: 1.5px solid var(--ardosia-light); border-radius: var(--radius); padding: 10px 14px; color: var(--espresso); background: var(--white); outline: none; transition: border-color 0.15s; -webkit-appearance: none; }
-  input:focus, select:focus { border-color: var(--brasa); }
-  input.field-error, select.field-error { border-color: var(--brasa); background: var(--brasa-light); }
-  .input-wrap { position: relative; }
-  .input-pre { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--ardosia); pointer-events: none; font-weight: 500; font-family: 'DM Sans', sans-serif; }
-  .input-wrap input { padding-left: 32px; }
-  .field-hint { font-size: 11px; color: var(--ardosia); margin-top: 2px; font-family: 'DM Sans', sans-serif; }
-  .field-error-msg { font-size: 11px; color: var(--brasa); margin-top: 4px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; }
-  .field-error-msg.visible { display: block; }
-
-  .regime-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-  .regime-btn { border: 1.5px solid var(--ardosia-light); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; background: var(--white); color: var(--ardosia); font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-  .regime-btn:hover { border-color: var(--ardosia); color: var(--espresso); }
-  .regime-btn.sel { border-color: var(--brasa); color: var(--brasa); background: var(--brasa-light); font-weight: 600; }
-  .regime-error { font-size: 11px; color: var(--brasa); margin-top: 6px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; }
-  .regime-error.visible { display: block; }
-
-  .btn-next { width: 100%; background: var(--espresso); color: var(--creme); border: none; border-radius: var(--radius); padding: 13px; font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .btn-next:hover { opacity: 0.85; }
-  .btn-back { background: none; border: 1.5px solid var(--ardosia-light); border-radius: var(--radius); padding: 8px 16px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--ardosia); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; }
-
-  .loading-body { padding: 48px 24px; text-align: center; }
-  .spinner { width: 36px; height: 36px; border: 2.5px solid var(--ardosia-light); border-top-color: var(--brasa); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 16px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-label { font-size: 15px; font-weight: 600; color: var(--espresso); margin-bottom: 20px; font-family: 'DM Sans', sans-serif; }
-  .loading-items { list-style: none; display: inline-block; text-align: left; }
-  .loading-items li { font-size: 13px; color: var(--ardosia); padding: 4px 0; display: flex; align-items: center; gap: 10px; transition: color 0.3s; font-family: 'DM Sans', sans-serif; }
-  .loading-items li::before { content: '○'; font-size: 10px; flex-shrink: 0; }
-  .loading-items li.done { color: var(--espresso); }
-  .loading-items li.done::before { content: '✓'; color: var(--success); font-size: 12px; }
-
-  .results-body { padding: 24px; }
-  .company-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--brasa-light); color: var(--brasa); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.02em; font-family: 'DM Sans', sans-serif; }
-  .alert { border-radius: var(--radius); padding: 14px 16px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
-  .alert-warn { background: var(--ouro-light); color: var(--espresso); border-left: 3px solid var(--ouro); }
-  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-  .alert b { font-weight: 700; color: var(--brasa); }
-
-  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-  .kpi { background: var(--creme); border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 14px 14px 12px; }
-  .kpi-label { font-size: 11px; font-weight: 600; color: var(--ardosia); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
-  .kpi-value { font-size: 20px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; color: var(--espresso); }
-  .kpi-sub { font-size: 11px; color: var(--ardosia); margin-top: 5px; line-height: 1.3; font-family: 'DM Sans', sans-serif; }
-  .kpi.danger .kpi-value { color: var(--brasa); }
-  .kpi.success .kpi-value { color: var(--success); }
-  .kpi.warning .kpi-value { color: var(--ouro); }
-
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ardosia); margin-bottom: 12px; margin-top: 4px; font-family: 'DM Sans', sans-serif; }
-  .divider { border: none; border-top: 1px solid var(--ardosia-light); margin: 20px 0; }
-
-  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .bar-name { font-size: 12px; color: var(--ardosia); width: 140px; flex-shrink: 0; text-align: right; font-family: 'DM Sans', sans-serif; }
-  .bar-track { flex: 1; background: var(--ardosia-light); border-radius: 6px; height: 26px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; transition: width 0.7s cubic-bezier(.4,0,.2,1); font-family: 'DM Sans', sans-serif; }
-  .bf-red   { background: var(--brasa-light);  color: var(--brasa); }
-  .bf-green { background: var(--success-light); color: var(--success); }
-  .bf-amber { background: var(--ouro-light);    color: var(--ouro); }
-  .bf-blue  { background: var(--ardosia-light); color: var(--ardosia); }
-
-  .insight { border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start; background: var(--white); }
-  .insight-ico { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .insight-title { font-size: 13px; font-weight: 700; color: var(--espresso); margin-bottom: 3px; font-family: 'DM Sans', sans-serif; }
-  .insight-text { font-size: 12px; color: var(--ardosia); line-height: 1.55; font-family: 'DM Sans', sans-serif; }
-  .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; margin-left: 6px; vertical-align: middle; font-family: 'DM Sans', sans-serif; }
-  .tag-red   { background: var(--brasa-light);  color: var(--brasa); }
-  .tag-amber { background: var(--ouro-light);   color: var(--ouro); }
-  .tag-blue  { background: var(--ardosia-light); color: var(--ardosia); }
-
-  .cta-box { background: var(--espresso); border-radius: var(--radius-lg); padding: 24px; margin-top: 24px; color: var(--creme); }
-  .cta-box h3 { font-size: 17px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; color: var(--creme); }
-  .cta-box p  { font-size: 13px; color: rgba(251,244,236,0.6); margin-bottom: 20px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
-  .cta-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .btn-cta-p { background: var(--brasa); color: var(--creme); border: none; border-radius: var(--radius); padding: 11px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.15s; }
-  .btn-cta-p:hover { opacity: 0.85; }
-  .btn-cta-s { background: rgba(251,244,236,0.08); color: rgba(251,244,236,0.8); border: 1px solid rgba(251,244,236,0.15); border-radius: var(--radius); padding: 11px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.15s; }
-  .btn-cta-s:hover { background: rgba(251,244,236,0.14); }
-
-  .next-steps { background: var(--creme); border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 16px; margin-top: 16px; }
-  .next-steps-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ardosia); margin-bottom: 12px; font-family: 'DM Sans', sans-serif; }
-  .next-step-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ardosia-light); }
-  .next-step-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-  .next-step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--espresso); color: var(--creme); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-family: 'DM Sans', sans-serif; }
-  .next-step-text { font-size: 12px; color: var(--espresso); line-height: 1.5; font-family: 'DM Sans', sans-serif; }
-  .next-step-text strong { font-weight: 700; }
-
-  footer { text-align: center; padding: 32px 16px; font-size: 12px; color: var(--ardosia); font-family: 'DM Sans', sans-serif; border-top: 1px solid var(--ardosia-light); }
-  footer a { color: var(--brasa); text-decoration: none; }
-
-  @media (max-width: 520px) {
-    .hero { padding: 56px 20px 60px; }
-    .hero-stats { gap: 24px; }
-    .form-grid { grid-template-columns: 1fr; }
-    .kpi-grid { grid-template-columns: 1fr; }
-    .cta-btns { grid-template-columns: 1fr; }
-  }
-</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
 
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brasa: #B5451B;
+  --brasa-light: #F5E6DF;
+  --espresso: #2C1A0E;
+  --creme: #FBF4EC;
+  --ouro: #C8922A;
+  --ouro-light: #FDF3DC;
+  --ardosia: #7A6A5E;
+  --ardosia-light: #EDE6DF;
+  --ink-30: #B5A89E;
+  --white: #FFFFFF;
+  --success: #2E6B2E;
+  --success-light: #E8F5E8;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-md: 0 4px 16px rgba(44,26,14,0.10);
+}
+
+html { font-size: 16px; }
+body { font-family: 'Lora', Georgia, serif; background: var(--creme); color: var(--espresso); line-height: 1.6; min-height: 100vh; }
+
+/* ── HERO ── */
+.hero { background: var(--espresso); color: var(--creme); padding: 72px 24px 56px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; border-radius: 50%; background: rgba(181,69,27,0.18); pointer-events: none; }
+.hero::after  { content: ''; position: absolute; bottom: -60px; left: 20%; width: 220px; height: 220px; border-radius: 50%; background: rgba(200,146,42,0.12); pointer-events: none; }
+
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(251,244,236,0.08); border: 1px solid rgba(251,244,236,0.18); border-radius: 20px; padding: 4px 14px; font-size: 12px; letter-spacing: 0.04em; margin-bottom: 28px; color: rgba(251,244,236,0.6); font-family: 'DM Sans', sans-serif; }
+.hero-badge span { color: var(--ouro); }
+
+.hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 18px; color: var(--creme); }
+.hero h1 em { font-style: italic; color: var(--ouro); }
+.hero-sub { font-size: clamp(15px, 2.5vw, 18px); color: rgba(251,244,236,0.6); max-width: 520px; margin: 0 auto 44px; line-height: 1.55; font-family: 'DM Sans', sans-serif; }
+
+/* ── BIFURCAÇÃO ── */
+.bif-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 560px; margin: 0 auto 48px; text-align: left; }
+.bif-card { border: 1px solid rgba(251,244,236,0.15); padding: 22px; cursor: pointer; transition: border-color 0.15s; position: relative; }
+.bif-card:hover { border-color: rgba(251,244,236,0.35); }
+.bif-card.primary { background: var(--brasa); border-color: var(--brasa); }
+.bif-card .bif-ico { font-size: 20px; margin-bottom: 12px; color: rgba(251,244,236,0.5); }
+.bif-card.primary .bif-ico { color: rgba(251,244,236,0.9); }
+.bif-card h3 { font-size: 15px; font-weight: 400; color: var(--creme); margin-bottom: 6px; font-family: 'Lora', serif; }
+.bif-card p  { font-size: 12px; color: rgba(251,244,236,0.55); line-height: 1.55; margin-bottom: 14px; font-family: 'DM Sans', sans-serif; }
+.bif-cta { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; color: var(--ouro); letter-spacing: 0.02em; display: flex; align-items: center; gap: 4px; }
+.bif-card.primary .bif-cta { color: var(--creme); }
+
+/* ── STATS ── */
+.hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.hero-stat-val   { font-size: 30px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; color: var(--creme); }
+.hero-stat-label { font-size: 11px; color: rgba(251,244,236,0.45); line-height: 1.35; max-width: 120px; margin: 0 auto; font-family: 'DM Sans', sans-serif; }
+
+/* ── FORM WRAPPER ── */
+.form-wrapper { max-width: 600px; margin: -32px auto 0; padding: 0 16px 80px; }
+.form-card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); overflow: hidden; border: 1px solid var(--ardosia-light); }
+
+/* ── AUDIENCE TOGGLE ── */
+.aud-toggle-bar { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--ardosia-light); }
+.aud-tab { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--ardosia); background: var(--creme); border: none; cursor: pointer; transition: all 0.15s; letter-spacing: 0.01em; text-align: center; }
+.aud-tab:first-child { border-right: 1px solid var(--ardosia-light); }
+.aud-tab.active { background: var(--espresso); color: var(--creme); }
+
+/* ── FORM HEADER ── */
+.form-card-header { background: var(--creme); border-bottom: 1px solid var(--ardosia-light); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+.form-card-title  { font-size: 11px; font-weight: 600; color: var(--ardosia); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
+.progress-pills   { display: flex; gap: 6px; align-items: center; }
+.prog-pill        { width: 24px; height: 4px; border-radius: 2px; background: var(--ardosia-light); transition: background 0.3s; }
+.prog-pill.active, .prog-pill.done { background: var(--brasa); }
+.form-card-body   { padding: 28px 24px; }
+
+/* ── STEPS ── */
+.step { display: none; }
+.step.active { display: block; }
+.step-title { font-size: 20px; font-weight: 400; margin-bottom: 4px; letter-spacing: -0.01em; color: var(--espresso); font-family: 'Lora', serif; }
+.step-sub   { font-size: 14px; color: var(--ardosia); margin-bottom: 24px; font-family: 'DM Sans', sans-serif; }
+
+/* ── INTENT (chips + open Q) ── */
+.intent-box { background: var(--creme); border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 16px; margin-bottom: 20px; }
+.intent-label { font-size: 12px; font-weight: 600; color: var(--ardosia); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; font-family: 'DM Sans', sans-serif; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--white); border: 1.5px solid var(--ardosia-light); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; color: var(--ardosia); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+.chip:hover  { border-color: var(--ardosia); color: var(--espresso); }
+.chip.active { background: var(--brasa-light); border-color: var(--brasa); color: var(--brasa); font-weight: 700; }
+
+.open-q { margin-bottom: 20px; }
+.open-q label { font-size: 13px; font-style: italic; color: var(--espresso); display: block; margin-bottom: 8px; font-family: 'Lora', serif; }
+.open-q textarea { width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; border: 1.5px solid var(--ardosia-light); border-radius: var(--radius); padding: 10px 14px; color: var(--espresso); background: var(--white); resize: none; height: 76px; line-height: 1.55; outline: none; transition: border-color 0.15s; }
+.open-q textarea:focus { border-color: var(--brasa); }
+.open-q .hint { font-size: 11px; color: var(--ardosia); margin-top: 4px; font-family: 'DM Sans', sans-serif; }
+
+/* ── FORM FIELDS ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.fg-full { grid-column: 1 / -1; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+label { font-size: 13px; font-weight: 600; color: var(--espresso); font-family: 'DM Sans', sans-serif; }
+input, select, textarea { font-family: 'DM Sans', sans-serif; font-size: 15px; border: 1.5px solid var(--ardosia-light); border-radius: var(--radius); padding: 10px 14px; color: var(--espresso); background: var(--white); outline: none; transition: border-color 0.15s; -webkit-appearance: none; }
+input:focus, select:focus { border-color: var(--brasa); }
+input.field-error, select.field-error { border-color: var(--brasa); background: var(--brasa-light); }
+.input-wrap { position: relative; }
+.input-pre { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--ardosia); pointer-events: none; font-weight: 500; font-family: 'DM Sans', sans-serif; }
+.input-wrap input { padding-left: 32px; }
+.field-hint      { font-size: 11px; color: var(--ardosia); margin-top: 2px; font-family: 'DM Sans', sans-serif; }
+.field-error-msg { font-size: 11px; color: var(--brasa); margin-top: 4px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; }
+.field-error-msg.visible { display: block; }
+
+.regime-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.regime-btn { border: 1.5px solid var(--ardosia-light); border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; background: var(--white); color: var(--ardosia); font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+.regime-btn:hover { border-color: var(--ardosia); color: var(--espresso); }
+.regime-btn.sel   { border-color: var(--brasa); color: var(--brasa); background: var(--brasa-light); font-weight: 600; }
+.regime-error { font-size: 11px; color: var(--brasa); margin-top: 6px; font-weight: 600; font-family: 'DM Sans', sans-serif; display: none; }
+.regime-error.visible { display: block; }
+
+/* ── BUTTONS ── */
+.btn-next { width: 100%; background: var(--espresso); color: var(--creme); border: none; border-radius: var(--radius); padding: 13px; font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-next:hover { opacity: 0.85; }
+.btn-next.brasa { background: var(--brasa); }
+.btn-back { background: none; border: 1.5px solid var(--ardosia-light); border-radius: var(--radius); padding: 8px 16px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; color: var(--ardosia); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; }
+
+/* ── CONTADOR FLOW ── */
+.contador-note { background: var(--espresso); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; border-left: 3px solid var(--ouro); }
+.contador-note h3 { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ouro); margin-bottom: 6px; }
+.contador-note p  { font-size: 13px; color: rgba(251,244,236,0.65); line-height: 1.6; font-family: 'DM Sans', sans-serif; }
+.success-box { background: var(--success-light); border: 1px solid #a8d5a8; border-radius: var(--radius); padding: 20px; text-align: center; }
+.success-box h3 { font-size: 18px; font-weight: 400; color: var(--success); margin-bottom: 8px; }
+.success-box p  { font-size: 13px; color: var(--espresso); line-height: 1.6; font-family: 'DM Sans', sans-serif; }
+
+/* ── LOADING ── */
+.loading-body { padding: 48px 24px; text-align: center; }
+.spinner { width: 36px; height: 36px; border: 2.5px solid var(--ardosia-light); border-top-color: var(--brasa); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-label { font-size: 15px; font-weight: 600; color: var(--espresso); margin-bottom: 20px; font-family: 'DM Sans', sans-serif; }
+.loading-items { list-style: none; display: inline-block; text-align: left; }
+.loading-items li { font-size: 13px; color: var(--ardosia); padding: 4px 0; display: flex; align-items: center; gap: 10px; transition: color 0.3s; font-family: 'DM Sans', sans-serif; }
+.loading-items li::before { content: '○'; font-size: 10px; flex-shrink: 0; }
+.loading-items li.done { color: var(--espresso); }
+.loading-items li.done::before { content: '✓'; color: var(--success); font-size: 12px; }
+
+/* ── RESULTS ── */
+.results-body { padding: 24px; }
+.company-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--brasa-light); color: var(--brasa); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; letter-spacing: 0.02em; font-family: 'DM Sans', sans-serif; }
+.alert { border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
+.alert-warn { background: var(--ouro-light); color: var(--espresso); border-left: 3px solid var(--ouro); }
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert b { font-weight: 700; color: var(--brasa); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.kpi { background: var(--creme); border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 14px 14px 12px; }
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--ardosia); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
+.kpi-value { font-size: 20px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; color: var(--espresso); }
+.kpi-sub   { font-size: 11px; color: var(--ardosia); margin-top: 5px; line-height: 1.3; font-family: 'DM Sans', sans-serif; }
+.kpi.danger .kpi-value  { color: var(--brasa); }
+.kpi.success .kpi-value { color: var(--success); }
+.kpi.warning .kpi-value { color: var(--ouro); }
+
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ardosia); margin-bottom: 12px; margin-top: 4px; font-family: 'DM Sans', sans-serif; }
+.divider { border: none; border-top: 1px solid var(--ardosia-light); margin: 20px 0; }
+
+.bar-row   { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.bar-name  { font-size: 12px; color: var(--ardosia); width: 140px; flex-shrink: 0; text-align: right; font-family: 'DM Sans', sans-serif; }
+.bar-track { flex: 1; background: var(--ardosia-light); border-radius: 6px; height: 26px; overflow: hidden; }
+.bar-fill  { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; transition: width 0.7s cubic-bezier(.4,0,.2,1); font-family: 'DM Sans', sans-serif; }
+.bf-red   { background: var(--brasa-light);  color: var(--brasa); }
+.bf-green { background: var(--success-light); color: var(--success); }
+.bf-amber { background: var(--ouro-light);   color: var(--ouro); }
+.bf-blue  { background: var(--ardosia-light); color: var(--ardosia); }
+
+.insight { border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start; background: var(--white); }
+.insight-ico   { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.insight-title { font-size: 13px; font-weight: 700; color: var(--espresso); margin-bottom: 3px; font-family: 'DM Sans', sans-serif; }
+.insight-text  { font-size: 12px; color: var(--ardosia); line-height: 1.55; font-family: 'DM Sans', sans-serif; }
+.tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; margin-left: 6px; vertical-align: middle; font-family: 'DM Sans', sans-serif; }
+.tag-red   { background: var(--brasa-light);  color: var(--brasa); }
+.tag-amber { background: var(--ouro-light);   color: var(--ouro); }
+.tag-blue  { background: var(--ardosia-light); color: var(--ardosia); }
+
+.cta-box { background: var(--espresso); border-radius: var(--radius-lg); padding: 24px; margin-top: 24px; color: var(--creme); }
+.cta-box h3 { font-size: 17px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; color: var(--creme); }
+.cta-box p  { font-size: 13px; color: rgba(251,244,236,0.6); margin-bottom: 20px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
+.cta-btns   { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-cta-p  { background: var(--brasa); color: var(--creme); border: none; border-radius: var(--radius); padding: 11px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.15s; }
+.btn-cta-p:hover { opacity: 0.85; }
+.btn-cta-s  { background: rgba(251,244,236,0.08); color: rgba(251,244,236,0.8); border: 1px solid rgba(251,244,236,0.15); border-radius: var(--radius); padding: 11px; font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.15s; }
+.btn-cta-s:hover { background: rgba(251,244,236,0.14); }
+
+.next-steps { background: var(--creme); border: 1px solid var(--ardosia-light); border-radius: var(--radius); padding: 16px; margin-top: 16px; }
+.next-steps-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ardosia); margin-bottom: 12px; font-family: 'DM Sans', sans-serif; }
+.next-step-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ardosia-light); }
+.next-step-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.next-step-num  { width: 20px; height: 20px; border-radius: 50%; background: var(--espresso); color: var(--creme); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-family: 'DM Sans', sans-serif; }
+.next-step-text { font-size: 12px; color: var(--espresso); line-height: 1.5; font-family: 'DM Sans', sans-serif; }
+.next-step-text strong { font-weight: 700; }
+
+footer { text-align: center; padding: 32px 16px; font-size: 12px; color: var(--ardosia); font-family: 'DM Sans', sans-serif; border-top: 1px solid var(--ardosia-light); }
+footer a { color: var(--brasa); text-decoration: none; }
+
+@media (max-width: 520px) {
+  .hero { padding: 48px 20px 52px; }
+  .bif-wrap { grid-template-columns: 1fr; gap: 8px; }
+  .hero-stats { gap: 24px; }
+  .form-grid  { grid-template-columns: 1fr; }
+  .kpi-grid   { grid-template-columns: 1fr; }
+  .cta-btns   { grid-template-columns: 1fr; }
+}
+</style>
+</head>
 <body>
 
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero">
-  <div class="hero-badge"><span>●</span> Reforma Tributária</div>
-  <h1>A gente faz a conta que<br/><em>ninguém te conta.</em></h1>
-  <p>Descubra em 2 minutos quanto sua empresa está perdendo com a Reforma Tributária, e o que fazer antes que vire prejuízo.</p>
+  <div class="hero-badge"><span>●</span> Split payment ativo — maio/26</div>
+  <h1>A conta que<br><em>ninguém te conta.</em></h1>
+  <p class="hero-sub">Descubra o impacto real da Reforma Tributária no seu caixa — e o que fazer antes que vire prejuízo.</p>
+
+  <!-- Bifurcação dono / contador -->
+  <div class="bif-wrap">
+    <div class="bif-card primary" onclick="escolherPublico('empresa')">
+      <div class="bif-ico">▣</div>
+      <h3>Sou dono de empresa</h3>
+      <p>Veja quanto o split payment vai reter do seu caixa e quais créditos CBS/IBS você pode recuperar.</p>
+      <div class="bif-cta">Fazer diagnóstico gratuito →</div>
+    </div>
+    <div class="bif-card" onclick="escolherPublico('contador')">
+      <div class="bif-ico">◈</div>
+      <h3>Sou contador</h3>
+      <p>Ofereça esse diagnóstico para seus clientes e vire referência na transição para CBS/IBS.</p>
+      <div class="bif-cta">Ferramenta para escritórios →</div>
+    </div>
+  </div>
+
   <div class="hero-stats">
     <div>
       <div class="hero-stat-val">95%</div>
-      <!--
-        CORREÇÃO #8: Estatística do IBPT refere-se a erros de apuração tributária em geral,
-        não especificamente ao CBS/IBS. Reformulado para ser factualmente defensável.
-      -->
       <div class="hero-stat-label">das PMEs cometem erros na apuração tributária (IBPT)</div>
     </div>
     <div>
       <div class="hero-stat-val">Maio/26</div>
-      <!--
-        CORREÇÃO #10: Split payment já está ativo desde maio/2026 (Decreto 12.955/2026),
-        não é uma promessa futura de 2027. Comunicar urgência real, não projetada.
-      -->
       <div class="hero-stat-label">split payment já ativo — impacto no caixa começa agora</div>
     </div>
     <div>
@@ -220,13 +273,20 @@ posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https
       <div class="hero-stat-label">custo do diagnóstico</div>
     </div>
   </div>
-  <a href="#diagnostico" class="hero-cta">Fazer diagnóstico gratuito →</a>
-  <div class="hero-cta-sub">Sem cadastro. Sem integração. Leva 2 minutos.</div>
 </section>
 
+<!-- ═══════════════════════════ FORM ═══════════════════════════ -->
 <div class="form-wrapper" id="diagnostico">
   <div class="form-card">
-    <div class="form-card-header">
+
+    <!-- Toggle dono / contador -->
+    <div class="aud-toggle-bar">
+      <button class="aud-tab active" id="tab-empresa" onclick="switchPublico('empresa')">▣ &nbsp;Dono de empresa</button>
+      <button class="aud-tab"        id="tab-contador" onclick="switchPublico('contador')">◈ &nbsp;Contador</button>
+    </div>
+
+    <!-- Header com progress (só aparece no fluxo empresa) -->
+    <div class="form-card-header" id="form-header">
       <span class="form-card-title">Diagnóstico fiscal</span>
       <div class="progress-pills">
         <div class="prog-pill active" id="pp1"></div>
@@ -234,206 +294,300 @@ posthog.init('phc_rZT3mvaCqye4rZxafXDMYEQwvqM8DXPW8a5pXQbFo7YH',{api_host:'https
         <div class="prog-pill" id="pp3"></div>
       </div>
     </div>
-    <div class="form-card-body" id="form-body">
 
-      <div class="step active" id="s1">
-        <div class="step-title">Sobre sua empresa</div>
-        <div class="step-sub">Passo 1 de 2 — dados básicos</div>
-        <div class="form-grid">
-          <div class="form-group fg-full">
-            <label for="f-nome">Nome da empresa</label>
-            <input type="text" id="f-nome" placeholder="Ex: Construtora Rocha Ltda" autocomplete="organization" />
-            <span class="field-error-msg" id="err-nome">Informe o nome da empresa.</span>
-          </div>
-          <div class="form-group fg-full">
-            <label for="f-setor">Setor de atuação</label>
-            <select id="f-setor">
-              <option value="">Selecionar...</option>
-              <option value="construcao">Construção civil</option>
-              <option value="transporte">Transporte e logística</option>
-              <option value="saude">Saúde (clínica, consultório)</option>
-              <option value="comercio">Comércio varejista</option>
-              <option value="servicos">Serviços em geral</option>
-              <option value="industria">Indústria</option>
-              <!--
-                CORREÇÃO #13: Agronegócio mantido mas com nota de exceção visível no diagnóstico.
-                O setor tem regime especial (crédito presumido, arts. 138+ LC 214/2025).
-              -->
-              <option value="agro">Agronegócio ⚠</option>
-            </select>
-            <span class="field-error-msg" id="err-setor">Selecione o setor de atuação.</span>
-          </div>
-          <div class="form-group fg-full">
-            <label>Regime tributário atual</label>
-            <div class="regime-group">
-              <button class="regime-btn" onclick="pickRegime(this,'simples')">Simples Nacional</button>
-              <button class="regime-btn" onclick="pickRegime(this,'presumido')">Lucro Presumido</button>
-              <button class="regime-btn" onclick="pickRegime(this,'real')">Lucro Real</button>
-              <!--
-                CORREÇÃO #9: MEI mantido mas validação de faturamento máximo aplicada em calcular().
-                Limite legal: R$ 81.000/ano ≈ R$ 6.750/mês.
-              -->
-              <button class="regime-btn" onclick="pickRegime(this,'mei')">MEI</button>
+    <!-- ─── FLUXO EMPRESA ─── -->
+    <div id="flow-empresa">
+      <div class="form-card-body">
+
+        <!-- Passo 1: básicos + intenção -->
+        <div class="step active" id="s1">
+          <div class="step-title">Sobre sua empresa</div>
+          <div class="step-sub">Passo 1 de 2 — dados básicos</div>
+
+          <div class="form-grid">
+            <div class="form-group fg-full">
+              <label for="f-nome">Nome da empresa</label>
+              <input type="text" id="f-nome" placeholder="Ex: Construtora Rocha Ltda" autocomplete="organization" />
+              <span class="field-error-msg" id="err-nome">Informe o nome da empresa.</span>
             </div>
-            <span class="regime-error" id="err-regime">Selecione o regime tributário.</span>
+            <div class="form-group fg-full">
+              <label for="f-setor">Setor de atuação</label>
+              <select id="f-setor">
+                <option value="">Selecionar...</option>
+                <option value="construcao">Construção civil</option>
+                <option value="transporte">Transporte e logística</option>
+                <option value="saude">Saúde (clínica, consultório)</option>
+                <option value="comercio">Comércio varejista</option>
+                <option value="servicos">Serviços em geral</option>
+                <option value="industria">Indústria</option>
+                <option value="agro">Agronegócio ⚠</option>
+              </select>
+              <span class="field-error-msg" id="err-setor">Selecione o setor de atuação.</span>
+            </div>
+            <div class="form-group fg-full">
+              <label>Regime tributário atual</label>
+              <div class="regime-group">
+                <button class="regime-btn" onclick="pickRegime(this,'simples')">Simples Nacional</button>
+                <button class="regime-btn" onclick="pickRegime(this,'presumido')">Lucro Presumido</button>
+                <button class="regime-btn" onclick="pickRegime(this,'real')">Lucro Real</button>
+                <button class="regime-btn" onclick="pickRegime(this,'mei')">MEI</button>
+              </div>
+              <span class="regime-error" id="err-regime">Selecione o regime tributário.</span>
+            </div>
+          </div>
+
+          <!-- Pergunta de intenção -->
+          <div class="intent-box">
+            <div class="intent-label">O que mais te preocupa com a Reforma?</div>
+            <div class="chips">
+              <div class="chip" onclick="toggleChip(this)">Caixa com split payment</div>
+              <div class="chip" onclick="toggleChip(this)">Créditos CBS/IBS</div>
+              <div class="chip" onclick="toggleChip(this)">Mudar de regime</div>
+              <div class="chip" onclick="toggleChip(this)">Entender a lei</div>
+              <div class="chip" onclick="toggleChip(this)">Explicar pro meu contador</div>
+            </div>
+          </div>
+
+          <!-- Campo aberto -->
+          <div class="open-q">
+            <label for="f-openq">Em uma frase, qual é o maior problema tributário da sua empresa hoje?</label>
+            <textarea id="f-openq" placeholder="Ex: não sei se vale a pena sair do Simples Nacional..."></textarea>
+            <div class="hint">Opcional — torna o diagnóstico mais preciso.</div>
+          </div>
+
+          <button class="btn-next" onclick="next1()">Continuar →</button>
+        </div>
+
+        <!-- Passo 2: financeiro -->
+        <div class="step" id="s2">
+          <button class="btn-back" onclick="back1()">← Voltar</button>
+          <div class="step-title">Dados financeiros</div>
+          <div class="step-sub">Passo 2 de 2 — valores aproximados já funcionam</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="f-fat">Faturamento mensal</label>
+              <div class="input-wrap"><span class="input-pre">R$</span>
+                <input type="number" id="f-fat" placeholder="150.000" min="0" />
+              </div>
+              <span class="field-error-msg" id="err-fat">Informe o faturamento mensal.</span>
+            </div>
+            <div class="form-group">
+              <label for="f-comp">Compras de insumos / mês</label>
+              <div class="input-wrap"><span class="input-pre">R$</span>
+                <input type="number" id="f-comp" placeholder="60.000" min="0" />
+              </div>
+              <span class="field-hint">Matéria-prima, mercadorias, materiais</span>
+            </div>
+            <div class="form-group">
+              <label for="f-serv">Serviços contratados / mês</label>
+              <div class="input-wrap"><span class="input-pre">R$</span>
+                <input type="number" id="f-serv" placeholder="20.000" min="0" />
+              </div>
+              <span class="field-hint">Terceiros, subempreiteiras, consultores</span>
+            </div>
+            <div class="form-group">
+              <label for="f-folha">Folha de pagamento / mês</label>
+              <div class="input-wrap"><span class="input-pre">R$</span>
+                <input type="number" id="f-folha" placeholder="40.000" min="0" />
+              </div>
+              <span class="field-hint">CLT + encargos. Não gera crédito CBS/IBS.</span>
+            </div>
+            <div class="form-group fg-full">
+              <label for="f-forn">Seus fornecedores são principalmente do...</label>
+              <select id="f-forn">
+                <option value="misto">Misto (Simples + Lucro)</option>
+                <option value="simples">Maioria do Simples Nacional</option>
+                <option value="lucro">Maioria do Lucro Real / Presumido</option>
+              </select>
+              <span class="field-hint">Fornecedores do Simples que permanecerem no DAS padrão não geram crédito CBS/IBS — a menos que optem pelo Simples Híbrido (disponível a partir de 2027).</span>
+            </div>
+          </div>
+          <button class="btn-next brasa" onclick="calcular()">Calcular meu impacto →</button>
+        </div>
+
+        <!-- Loading -->
+        <div class="step" id="s-load">
+          <div class="loading-body">
+            <div class="spinner"></div>
+            <div class="loading-label" id="load-txt">Analisando sua empresa...</div>
+            <ul class="loading-items">
+              <li id="li1">Calculando créditos CBS/IBS elegíveis</li>
+              <li id="li2">Simulando impacto do split payment</li>
+              <li id="li3">Comparando com benchmark do setor</li>
+              <li id="li4">Identificando oportunidades de recuperação</li>
+            </ul>
           </div>
         </div>
-        <button class="btn-next" onclick="next1()">Continuar →</button>
-      </div>
 
-      <div class="step" id="s2">
-        <button class="btn-back" onclick="back1()">← Voltar</button>
-        <div class="step-title">Dados financeiros</div>
-        <div class="step-sub">Passo 2 de 2 — valores aproximados já funcionam</div>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="f-fat">Faturamento mensal</label>
-            <div class="input-wrap"><span class="input-pre">R$</span>
-              <input type="number" id="f-fat" placeholder="150.000" min="0" />
-            </div>
-            <!--
-              CORREÇÃO #5: Mensagem de erro explícita para campo obrigatório vazio.
-            -->
-            <span class="field-error-msg" id="err-fat">Informe o faturamento mensal.</span>
-          </div>
-          <div class="form-group">
-            <label for="f-comp">Compras de insumos / mês</label>
-            <div class="input-wrap"><span class="input-pre">R$</span>
-              <input type="number" id="f-comp" placeholder="60.000" min="0" />
-            </div>
-            <span class="field-hint">Matéria-prima, mercadorias, materiais</span>
-          </div>
-          <div class="form-group">
-            <label for="f-serv">Serviços contratados / mês</label>
-            <div class="input-wrap"><span class="input-pre">R$</span>
-              <input type="number" id="f-serv" placeholder="20.000" min="0" />
-            </div>
-            <span class="field-hint">Terceiros, subempreiteiras, consultores</span>
-          </div>
-          <div class="form-group">
-            <label for="f-folha">Folha de pagamento / mês</label>
-            <div class="input-wrap"><span class="input-pre">R$</span>
-              <input type="number" id="f-folha" placeholder="40.000" min="0" />
-            </div>
-            <span class="field-hint">CLT + encargos. Não gera crédito CBS/IBS.</span>
-          </div>
-          <div class="form-group fg-full">
-            <label for="f-forn">Seus fornecedores são principalmente do...</label>
-            <select id="f-forn">
-              <option value="misto">Misto (Simples + Lucro)</option>
-              <option value="simples">Maioria do Simples Nacional</option>
-              <option value="lucro">Maioria do Lucro Real / Presumido</option>
-            </select>
-            <!--
-              CORREÇÃO #3: Reformulado para ser tecnicamente correto.
-              Fornecedores do Simples que permanecerem no DAS não destacam CBS/IBS nas NFs,
-              então o comprador não tem como aproveitar crédito. Se optarem pelo Simples Híbrido
-              (a partir de 2027), passam a gerar crédito. Art. 47, §3º e Art. 41, §3º LC 214/2025.
-            -->
-            <span class="field-hint">Fornecedores do Simples que permanecerem no DAS padrão não geram crédito CBS/IBS — a menos que optem pelo Simples Híbrido (disponível a partir de 2027).</span>
-          </div>
+        <!-- Resultado -->
+        <div class="step" id="s-res">
+          <div class="results-body" id="results-body"></div>
         </div>
-        <button class="btn-next" onclick="calcular()">Calcular meu impacto →</button>
-      </div>
 
-      <div class="step" id="s-load">
-        <div class="loading-body">
-          <div class="spinner"></div>
-          <div class="loading-label" id="load-txt">Analisando sua empresa...</div>
-          <ul class="loading-items">
-            <li id="li1">Calculando créditos CBS/IBS elegíveis</li>
-            <li id="li2">Simulando impacto do split payment</li>
-            <li id="li3">Comparando com benchmark do setor</li>
-            <li id="li4">Identificando oportunidades de recuperação</li>
-          </ul>
-        </div>
       </div>
-
-      <div class="step" id="s-res">
-        <div class="results-body" id="results-body"></div>
-      </div>
-
     </div>
+
+    <!-- ─── FLUXO CONTADOR ─── -->
+    <div id="flow-contador" style="display:none">
+      <div class="form-card-body">
+        <div class="step active" id="sc1">
+          <div class="contador-note">
+            <h3>◈ Ferramenta para escritórios contábeis</h3>
+            <p>Rode diagnósticos para seus clientes, vire referência na Reforma Tributária e mostre o valor do seu advisory antes mesmo de fechar contrato.</p>
+          </div>
+
+          <div class="step-title">Sobre seu escritório</div>
+          <div class="step-sub">Acesso antecipado — gratuito</div>
+
+          <div class="form-grid">
+            <div class="form-group fg-full">
+              <label for="c-nome">Nome do escritório</label>
+              <input type="text" id="c-nome" placeholder="Ex: Contabilidade Ferreira & Associados" />
+              <span class="field-error-msg" id="err-cnome">Informe o nome do escritório.</span>
+            </div>
+            <div class="form-group fg-full">
+              <label for="c-email">E-mail profissional</label>
+              <input type="email" id="c-email" placeholder="contador@escritorio.com.br" />
+              <span class="field-error-msg" id="err-cemail">Informe um e-mail válido.</span>
+            </div>
+            <div class="form-group">
+              <label for="c-clientes">Clientes PME atendidos</label>
+              <select id="c-clientes">
+                <option value="">Selecionar...</option>
+                <option value="menos20">Menos de 20</option>
+                <option value="20a50">20 a 50</option>
+                <option value="50a100">50 a 100</option>
+                <option value="mais100">Mais de 100</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="c-dificuldade">Maior dificuldade com a reforma</label>
+              <select id="c-dificuldade">
+                <option value="">Selecionar...</option>
+                <option value="explicar">Explicar para clientes</option>
+                <option value="calcular">Calcular impacto por cliente</option>
+                <option value="hibrido">Simples Híbrido vs migração</option>
+                <option value="creditos">Créditos CBS/IBS</option>
+                <option value="erp">Parametrização de ERP/NF</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Pergunta de intenção do contador -->
+          <div class="intent-box">
+            <div class="intent-label">O que você quer oferecer para seus clientes?</div>
+            <div class="chips">
+              <div class="chip" onclick="toggleChip(this)">Diagnóstico individual de impacto</div>
+              <div class="chip" onclick="toggleChip(this)">Análise de mudança de regime</div>
+              <div class="chip" onclick="toggleChip(this)">Relatório de créditos</div>
+              <div class="chip" onclick="toggleChip(this)">Simulação do split payment</div>
+            </div>
+          </div>
+
+          <button class="btn-next brasa" onclick="submeterContador()">Quero acesso antecipado →</button>
+          <button class="btn-back" style="width:100%;margin-top:8px;text-align:center;display:block" onclick="switchPublico('empresa')">
+            Prefiro ver o diagnóstico para empresas
+          </button>
+        </div>
+
+        <div class="step" id="sc-ok">
+          <div class="loading-body" style="padding:40px 24px">
+            <div class="success-box">
+              <h3>✓ Registrado com sucesso</h3>
+              <p style="margin-top:8px">Você entrou na lista de acesso antecipado para escritórios contábeis.<br><br>
+              Assim que a versão para contadores estiver disponível, você será o primeiro a saber. Enquanto isso, pode usar o diagnóstico para empresas para sentir a experiência do seu cliente.</p>
+              <button class="btn-next" style="margin-top:20px;max-width:320px;margin-left:auto;margin-right:auto" onclick="switchPublico('empresa')">
+                Ver diagnóstico para empresas →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <footer>
   <p>© 2026 Apurai · <a href="mailto:oi@apurai.com.br">oi@apurai.com.br</a></p>
   <p style="margin-top:6px;">Diagnóstico baseado em estimativas para o regime pleno (2033). Não substitui consultoria tributária.</p>
-  <!--
-    CORREÇÃO #14: Link para texto oficial da LC 214/2025 no Planalto.
-  -->
   <p style="margin-top:4px;">Base legal: <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm" target="_blank" rel="noopener">LC 214/2025</a> · <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/decreto/d12955.htm" target="_blank" rel="noopener">Decreto 12.955/2026</a></p>
 </footer>
 
 <script>
-// ─────────────────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
 // APURAI — Motor de cálculo fiscal
 // Base legal: LC 214/2025 (EC 132/2023), Decreto 12.955/2026
 //
-// CRONOGRAMA DE IMPLEMENTAÇÃO (LC 214/2025):
-// 2026:      CBS 0,9% + IBS 0,1% = 1% (alíquotas-teste). Valores recolhidos,
-//            mas compensados integralmente com PIS/COFINS do período (Arts. 343, 346 e 348).
-//            Split payment já ativo desde maio/2026 (Decreto 12.955/2026).
-// 2027–2028: CBS definida por Resolução do Senado (~8,8% estimado). IBS apenas 0,1%
-//            (estadual 0,05% + municipal 0,05%) — Art. 344.
-// 2029–2032: IBS cresce gradualmente (~10% ao ano da alíquota plena).
-// 2033+:     IBS pleno (~17,7%) + CBS plena (~8,8%) = ~26,5%. ICMS/ISS extintos.
+// CRONOGRAMA (LC 214/2025):
+// 2026:      CBS 0,9% + IBS 0,1% = 1% (alíquotas-teste, Arts. 343, 346, 348).
+//            Split payment ativo desde maio/2026 (Decreto 12.955/2026).
+// 2027–2028: CBS ~8,8% (Resolução Senado). IBS 0,1% (Art. 344).
+// 2029–2032: IBS cresce gradualmente até alíquota plena.
+// 2033+:     CBS ~8,8% + IBS ~17,7% = ~26,5%. ICMS/ISS extintos.
 //
-// ESTE DIAGNÓSTICO PROJETA O REGIME PLENO (2033+) como referência de longo prazo.
-// Impacto de curto prazo (2027–2028) será significativamente menor no IBS.
-// ─────────────────────────────────────────────────────────────────────────────
+// Este diagnóstico projeta o REGIME PLENO (2033+) como referência.
+// ═══════════════════════════════════════════════════════════════════════════
 
-const D = { regime: '', nome: '', setor: '' };
+const D = { regime: '', nome: '', setor: '', chips: [], openQ: '' };
 
 const SETOR_LABEL = {
-  construcao: 'Construção civil',
-  transporte:  'Transporte e logística',
-  saude:       'Saúde',
-  comercio:    'Comércio varejista',
-  servicos:    'Serviços em geral',
-  industria:   'Indústria',
-  agro:        'Agronegócio',
+  construcao: 'Construção civil', transporte: 'Transporte e logística',
+  saude: 'Saúde', comercio: 'Comércio varejista',
+  servicos: 'Serviços em geral', industria: 'Indústria', agro: 'Agronegócio',
 };
 const REG_LABEL = {
-  simples:   'Simples Nacional',
-  presumido: 'Lucro Presumido',
-  real:      'Lucro Real',
-  mei:       'MEI',
+  simples: 'Simples Nacional', presumido: 'Lucro Presumido',
+  real: 'Lucro Real', mei: 'MEI',
 };
 
-// ── Alíquotas LC 214/2025 — regime pleno (2033+) ────────────────────────────
-//
-// CORREÇÃO #1: Alíquotas apresentadas APENAS como referência do regime pleno (2033+).
-// Não são alíquotas de 2027. Em 2027, IBS = 0,1% (Art. 344). CBS ainda depende de
-// Resolução do Senado Federal (Art. 349), estimada em ~8,8% (equivalente ao PIS/COFINS atual).
-//
-// Redução 60% (arts. 82–86 e 128–138): saúde, agro → 26,5% × 40% = 10,6%
-// Redução 30% (art. 127): serviços com profissionais habilitados (ex: construção por engenheiros)
-
+// Alíquotas LC 214/2025 — regime pleno 2033+
 const ALIQ = {
-  CHEIA:  0.265,   // regime geral (comércio, indústria, serviços) — regime pleno 2033+
-  RED60:  0.106,   // redução 60% — saúde, agronegócio (arts. 82, 128, 138)
-  RED30:  0.1855,  // redução 30% — serviços intelectuais habilitados (art. 127)
-  TESTE:  0.010,   // alíquotas-teste 2026: CBS 0,9% + IBS 0,1% (Arts. 343 e 346)
-                   // recolhidas e compensadas com PIS/COFINS do período (Art. 348)
+  CHEIA: 0.265,  // regime geral
+  RED60: 0.106,  // redução 60%: saúde, agro (arts. 82, 128, 138)
+  RED30: 0.1855, // redução 30%: profissões habilitadas (art. 127)
+  TESTE: 0.010,  // alíquotas-teste 2026 (Arts. 343 e 346)
 };
-
-// Mapeamento setor → alíquota referência (regime pleno 2033+)
 const ALIQ_SETOR = {
-  saude:      ALIQ.RED60,   // arts. 128–131 LC 214/2025
-  agro:       ALIQ.RED60,   // art. 138 e Anexo IX LC 214/2025 — regime especial; ver nota no resultado
-  construcao: ALIQ.RED30,   // art. 127 (XI) — apenas para empresas compostas por engenheiros habilitados
-  transporte: ALIQ.CHEIA,
-  comercio:   ALIQ.CHEIA,
-  servicos:   ALIQ.CHEIA,
-  industria:  ALIQ.CHEIA,
+  saude: ALIQ.RED60, agro: ALIQ.RED60,
+  construcao: ALIQ.RED30, transporte: ALIQ.CHEIA,
+  comercio: ALIQ.CHEIA, servicos: ALIQ.CHEIA, industria: ALIQ.CHEIA,
 };
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-function brl(n)  { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
-function pct(n)  { return (n * 100).toFixed(1).replace('.', ',') + '%'; }
+// ── Helpers ────────────────────────────────────────────────────────────────
+function brl(n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); }
+function pct(n) { return (n * 100).toFixed(1).replace('.', ',') + '%'; }
 
+// ── UI: toggle público ─────────────────────────────────────────────────────
+function escolherPublico(pub) {
+  switchPublico(pub);
+  document.getElementById('diagnostico').scrollIntoView({ behavior: 'smooth' });
+  if (typeof posthog !== 'undefined') posthog.capture('hero_cta_clicked', { publico: pub });
+}
+
+function switchPublico(pub) {
+  const isEmpresa = pub === 'empresa';
+  document.getElementById('flow-empresa').style.display  = isEmpresa ? 'block' : 'none';
+  document.getElementById('flow-contador').style.display = isEmpresa ? 'none'  : 'block';
+  document.getElementById('form-header').style.display   = isEmpresa ? 'flex'  : 'none';
+  document.getElementById('tab-empresa').classList.toggle('active', isEmpresa);
+  document.getElementById('tab-contador').classList.toggle('active', !isEmpresa);
+  if (typeof posthog !== 'undefined') posthog.capture('publico_switched', { publico: pub });
+}
+
+// ── UI: chips ─────────────────────────────────────────────────────────────
+function toggleChip(el) {
+  el.classList.toggle('active');
+  const label = el.textContent.trim();
+  if (el.classList.contains('active')) {
+    D.chips.push(label);
+  } else {
+    D.chips = D.chips.filter(c => c !== label);
+  }
+  if (typeof posthog !== 'undefined') posthog.capture('chip_toggled', { chip: label, active: el.classList.contains('active') });
+}
+
+// ── UI: regime ─────────────────────────────────────────────────────────────
 function pickRegime(el, v) {
   document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('sel'));
   el.classList.add('sel');
@@ -442,7 +596,7 @@ function pickRegime(el, v) {
 }
 
 function setStep(id) {
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#flow-empresa .step').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 function setProg(n) {
@@ -451,40 +605,27 @@ function setProg(n) {
     el.className = 'prog-pill' + (i < n ? ' done' : i === n - 1 ? ' active' : '');
   });
 }
-
-// ── Validação inline ─────────────────────────────────────────────────────────
 function clearErrors() {
   document.querySelectorAll('.field-error-msg').forEach(el => el.classList.remove('visible'));
   document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
   document.querySelectorAll('.regime-error').forEach(el => el.classList.remove('visible'));
 }
 
-// ── Navegação do formulário ──────────────────────────────────────────────────
+// ── Navegação ─────────────────────────────────────────────────────────────
 function next1() {
   clearErrors();
-  D.nome  = document.getElementById('f-nome').value.trim();
-  D.setor = document.getElementById('f-setor').value;
+  D.nome   = document.getElementById('f-nome').value.trim();
+  D.setor  = document.getElementById('f-setor').value;
+  D.openQ  = document.getElementById('f-openq').value.trim();
   let ok = true;
-
-  // CORREÇÃO #5: Validação explícita com mensagens de erro visíveis por campo
-  if (!D.nome) {
-    document.getElementById('f-nome').classList.add('field-error');
-    document.getElementById('err-nome').classList.add('visible');
-    ok = false;
-  }
-  if (!D.setor) {
-    document.getElementById('f-setor').classList.add('field-error');
-    document.getElementById('err-setor').classList.add('visible');
-    ok = false;
-  }
-  if (!D.regime) {
-    document.getElementById('err-regime').classList.add('visible');
-    ok = false;
-  }
+  if (!D.nome)  { document.getElementById('f-nome').classList.add('field-error');  document.getElementById('err-nome').classList.add('visible');   ok = false; }
+  if (!D.setor) { document.getElementById('f-setor').classList.add('field-error'); document.getElementById('err-setor').classList.add('visible');  ok = false; }
+  if (!D.regime){ document.getElementById('err-regime').classList.add('visible'); ok = false; }
   if (!ok) return;
-
   setStep('s2'); setProg(2);
-  if (typeof posthog !== 'undefined') posthog.capture('step1_completed', { regime: D.regime, setor: D.setor });
+  if (typeof posthog !== 'undefined') posthog.capture('step1_completed', {
+    regime: D.regime, setor: D.setor, chips: D.chips, tem_openq: D.openQ.length > 0
+  });
 }
 
 function back1() { setStep('s1'); setProg(1); }
@@ -492,50 +633,36 @@ function back1() { setStep('s1'); setProg(1); }
 function calcular() {
   clearErrors();
   const fat = parseFloat(document.getElementById('f-fat').value);
-
-  // CORREÇÃO #5: Validação explícita do campo de faturamento com mensagem visível
   if (!fat || fat <= 0) {
     document.getElementById('f-fat').classList.add('field-error');
-    document.getElementById('err-fat').classList.add('visible');
-    return;
+    document.getElementById('err-fat').classList.add('visible'); return;
   }
-
-  // CORREÇÃO #9: Validação MEI com mensagem explicativa (limite R$ 81.000/ano)
   if (D.regime === 'mei' && fat > 6750) {
     document.getElementById('f-fat').classList.add('field-error');
     document.getElementById('err-fat').textContent = 'MEI tem limite de R$ 81.000/ano (~R$ 6.750/mês). Verifique o regime informado.';
-    document.getElementById('err-fat').classList.add('visible');
-    return;
+    document.getElementById('err-fat').classList.add('visible'); return;
   }
-
   D.fat   = fat;
   D.comp  = parseFloat(document.getElementById('f-comp').value)  || 0;
   D.serv  = parseFloat(document.getElementById('f-serv').value)  || 0;
   D.folha = parseFloat(document.getElementById('f-folha').value) || 0;
   D.forn  = document.getElementById('f-forn').value;
-
   if (typeof posthog !== 'undefined') posthog.capture('step2_completed', {
     regime: D.regime, setor: D.setor,
-    faixa:  fat < 50000 ? '<50k' : fat < 200000 ? '50-200k' : '>200k',
+    faixa: fat < 50000 ? '<50k' : fat < 200000 ? '50-200k' : '>200k',
   });
-
   setStep('s-load'); setProg(3);
   runLoader();
 }
 
 function runLoader() {
-  const msgs = [
-    'Aplicando alíquotas LC 214/2025...',
-    'Calculando créditos CBS/IBS...',
-    'Simulando impacto do split payment...',
-    'Identificando oportunidades...',
-  ];
-  const ids = ['li1','li2','li3','li4'];
+  const msgs = ['Aplicando alíquotas LC 214/2025...','Calculando créditos CBS/IBS...','Simulando impacto do split payment...','Identificando oportunidades...'];
+  const ids  = ['li1','li2','li3','li4'];
   let i = 0;
   const iv = setInterval(() => {
     if (i < ids.length) {
       document.getElementById('load-txt').textContent = msgs[i];
-      if (i > 0) document.getElementById(ids[i - 1]).classList.add('done');
+      if (i > 0) document.getElementById(ids[i-1]).classList.add('done');
       i++;
     } else {
       clearInterval(iv);
@@ -545,62 +672,46 @@ function runLoader() {
   }, 550);
 }
 
-// ── Motor de cálculo principal ───────────────────────────────────────────────
+// ── Fluxo contador ─────────────────────────────────────────────────────────
+function submeterContador() {
+  const nome  = document.getElementById('c-nome').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  let ok = true;
+  if (!nome)  { document.getElementById('c-nome').classList.add('field-error');  document.getElementById('err-cnome').classList.add('visible');  ok = false; }
+  if (!email || !email.includes('@')) { document.getElementById('c-email').classList.add('field-error'); document.getElementById('err-cemail').classList.add('visible'); ok = false; }
+  if (!ok) return;
+  if (typeof posthog !== 'undefined') posthog.capture('contador_signup', {
+    clientes: document.getElementById('c-clientes').value,
+    dificuldade: document.getElementById('c-dificuldade').value,
+    chips: D.chips,
+  });
+  document.querySelectorAll('#flow-contador .step').forEach(s => s.classList.remove('active'));
+  document.getElementById('sc-ok').classList.add('active');
+}
+
+// ── Motor de cálculo ────────────────────────────────────────────────────────
 function buildResults() {
   const { fat, comp, serv, folha, regime, forn, setor, nome } = D;
-
-  // 1. Alíquota efetiva do setor — referência regime pleno 2033+
   const aliq = ALIQ_SETOR[setor] || ALIQ.CHEIA;
-
-  // 2. Classificação do regime
   const isMEI        = regime === 'mei';
   const isSimples    = regime === 'simples';
   const isSimplesDAS = isSimples || isMEI;
   const isLucroReal  = regime === 'real';
-  // CORREÇÃO #12: flag para diferenciar Lucro Real de Presumido nos textos
 
-  // ── Bloco Simples Nacional / MEI ──────────────────────────────────────────
-  // Art. 41, LC 214/2025: optantes pelo Simples recolhem via DAS.
-  // No DAS padrão (não-híbrido): IBS/CBS estão embutidos, sem destaque para o comprador.
-  // MEI: permanece no SIMEI com guia fixa; isento de CBS/IBS nos termos da LC 214/2025.
-  // Simples Híbrido (opcional a partir de 2027): recolhe IBS/CBS fora do DAS → gera crédito.
-
-  // 3. Split payment (Arts. 31–35 LC 214/2025; Decreto 12.955/2026)
-  // Ativo desde maio/2026. Retém CBS+IBS sobre o valor recebido na liquidação.
-  // MEI e Simples DAS: não sujeitos ao split no modelo padrão (recolhem via DAS/SIMEI).
+  // Split payment (Arts. 31–35 LC 214/2025; Decreto 12.955/2026)
   let splitMes = 0;
-  if (!isSimplesDAS) {
-    splitMes = fat * aliq;
-  }
+  if (!isSimplesDAS) splitMes = fat * aliq;
 
-  // 4. Crédito CBS/IBS sobre entradas (não-cumulatividade — arts. 46–57 LC 214/2025)
-  //
-  // CORREÇÃO #3: Fator de fornecedores reformulado com precisão técnica.
-  // Art. 47, §3º: a não-cumulatividade aplica-se inclusive em aquisições do Simples Nacional.
-  // Porém, o crédito depende de CBS/IBS destacado na NF (Art. 47, §2º, I).
-  // Fornecedores do Simples no DAS padrão não destacam CBS/IBS → sem crédito para o comprador.
-  // Fornecedores do Simples que optarem pelo regime regular (Híbrido) → geram crédito integral.
-  // Estimativas de fator:
-  //   lucro  → 100% das entradas geram crédito (regime regular destaca CBS/IBS)
-  //   misto  → 65% (estimativa: proporção de fornecedores no regime regular)
-  //   simples → 35% (minoria pode ter optado pelo Simples Híbrido ou regime regular)
-  const fatorForn = isSimplesDAS
-    ? 0
+  // Crédito CBS/IBS (arts. 46–57 LC 214/2025)
+  const fatorForn = isSimplesDAS ? 0
     : (forn === 'lucro' ? 1.0 : forn === 'simples' ? 0.35 : 0.65);
   const credMes = (comp + serv) * fatorForn * aliq;
 
-  // 5. Débito líquido e saldo credor
+  // Débito líquido e saldo credor
   const debitoLiqMes = Math.max(0, splitMes - credMes);
   const saldoCreedor = Math.max(0, credMes - splitMes);
 
-  // 6. Estimativa de crédito potencial perdido
-  //
-  // CORREÇÃO #7: metodologia explicada com transparência.
-  // Para Lucro Real/Presumido: benchmark de 15% do crédito recuperável perdido
-  // por erros em NF-e (campo CSOSN/CST incorreto, alíquota errada, código NCM inválido).
-  // Estimativa baseada em benchmarks do setor contábil; varia conforme qualidade do ERP.
-  // Para Simples DAS: perda competitiva B2B — compradores do regime regular não recuperam
-  // crédito ao comprar de empresa no DAS. Estimativa: 30% das vendas são para PJ regime regular.
+  // Perda estimada
   let perdMes = 0;
   if (isSimplesDAS) {
     perdMes = fat * 0.30 * ALIQ.CHEIA;
@@ -608,153 +719,103 @@ function buildResults() {
     perdMes = credMes * 0.15;
   }
   const perdAno = perdMes * 12;
-
-  // 7. Folha: custo CBS/IBS indireto
-  //
-  // CORREÇÃO #6: Exibir o custo CBS/IBS não recuperável sobre a folha,
-  // não o valor bruto da folha. folhaImpacto = CBS/IBS embutido nas vendas
-  // que não tem contrapartida de crédito via folha.
   const folhaImpacto = folha * aliq;
 
-  // ── Alertas ───────────────────────────────────────────────────────────────
-  let alertas = '';
-
-  // CORREÇÃO #1 + #2: Aviso sobre cronograma real de implementação.
-  // Alíquotas-teste 2026: CBS 0,9% + IBS 0,1% = 1% (Arts. 343 e 346).
-  // Valores recolhidos mas compensados integralmente com PIS/COFINS (Art. 348).
-  // IBS pleno (17,7%) só a partir de 2033. CBS plena (~8,8%) depende de Resolução do Senado.
-  alertas += `<div class="alert alert-warn" style="margin-bottom:16px">
+  // ── Alertas ──────────────────────────────────────────────────────────────
+  let alertas = `<div class="alert alert-warn" style="margin-bottom:16px">
     <span class="alert-icon">📅</span>
     <div style="font-size:12px">
-      <b>Diagnóstico projetado para o regime pleno (a partir de 2033)</b> — quando CBS (~8,8%) e IBS (~17,7%) atingem suas alíquotas cheias. O impacto de curto prazo é gradual: em 2027–2028, o IBS é de apenas 0,1% (Art. 344 LC 214/2025); a alíquota plena do IBS chega ao longo de 2029–2032, com extinção total do ICMS/ISS em 2033. Em 2026, as alíquotas-teste de 1% (CBS 0,9% + IBS 0,1%, Arts. 343 e 346) são recolhidas e compensadas integralmente com PIS/COFINS do período (Art. 348).
+      <b>Diagnóstico projetado para o regime pleno (a partir de 2033)</b> — quando CBS (~8,8%) e IBS (~17,7%) atingem suas alíquotas cheias. O impacto é gradual: em 2027–2028, o IBS é de apenas 0,1% (Art. 344 LC 214/2025). Em 2026, as alíquotas-teste de 1% (CBS 0,9% + IBS 0,1%) são recolhidas e compensadas integralmente com PIS/COFINS (Art. 348).
     </div>
   </div>`;
 
   if (isMEI) {
     alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
-      <b>MEI:</b> você permanece no SIMEI com guia fixa e está isento de CBS/IBS nos termos da LC 214/2025.
-      Porém, suas notas <b>não destacam CBS/IBS</b> — clientes corporativos do regime regular não recuperam crédito ao comprar de você, o que pode reduzir sua competitividade em vendas B2B.
+      <b>MEI:</b> você permanece no SIMEI com guia fixa e está isento de CBS/IBS. Porém, suas notas <b>não destacam CBS/IBS</b> — clientes do regime regular não recuperam crédito ao comprar de você, o que pode reduzir sua competitividade em vendas B2B.
     </div></div>`;
   } else if (isSimples) {
     alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
-      <b>Simples Nacional (DAS padrão):</b> suas notas <b>não destacam CBS/IBS</b> para o comprador.
-      Clientes do Lucro Real/Presumido não recuperam crédito ao comprar de você — pressão competitiva crescente conforme o IBS aumenta de 2027 a 2033.
-      <br><br>A LC 214/2025 prevê o <b>Simples Híbrido</b> (opcional a partir de 2027): recolher IBS/CBS fora do DAS para gerar crédito integral aos clientes. A decisão é semestral. Consulte seu contador.
+      <b>Simples Nacional (DAS padrão):</b> suas notas <b>não destacam CBS/IBS</b>. Clientes do Lucro Real/Presumido não recuperam crédito ao comprar de você — pressão competitiva crescente conforme o IBS aumenta de 2027 a 2033.<br><br>
+      A LC 214/2025 prevê o <b>Simples Híbrido</b> (opcional a partir de 2027): recolher IBS/CBS fora do DAS para gerar crédito integral aos clientes. Consulte seu contador.
     </div></div>`;
   } else if (forn === 'simples') {
-    // CORREÇÃO #3: Reformulado — não é regra absoluta, é consequência do DAS padrão
     alertas += `<div class="alert alert-warn"><span class="alert-icon">⚠</span><div>
-      <b>Atenção:</b> a maioria dos seus fornecedores é do Simples Nacional.
-      Enquanto permanecerem no DAS padrão, eles <b>não destacam CBS/IBS nas NFs</b> — e você não recupera esse crédito.
-      Se optarem pelo Simples Híbrido (a partir de 2027), passam a gerar crédito integral.
-      Migrar fornecedores que ainda não decidiram pode recuperar até <b>${brl((comp + serv) * 0.65 * aliq)}/mês</b> em créditos.
+      <b>Atenção:</b> a maioria dos seus fornecedores é do Simples Nacional. No DAS padrão, eles <b>não destacam CBS/IBS nas NFs</b> — você não recupera esse crédito. Se optarem pelo Simples Híbrido (a partir de 2027), passam a gerar crédito integral. Isso pode representar até <b>${brl((comp + serv) * 0.65 * aliq)}/mês</b> em créditos recuperáveis.
     </div></div>`;
   }
 
-  // CORREÇÃO #12: Nota específica para Lucro Real vs. Presumido
   if (isLucroReal) {
-    alertas += `<div class="alert" style="background:var(--ardosia-light);border-left:3px solid var(--ardosia);margin-bottom:16px">
+    alertas += `<div class="alert" style="background:var(--ardosia-light);border-left:3px solid var(--ardosia);margin-bottom:14px">
       <span class="alert-icon">📋</span>
       <div style="font-size:12px">
-        <b>Lucro Real:</b> seu regime tem regras de crédito mais amplas que o Lucro Presumido — despesas operacionais e ativos imobilizados podem gerar créditos adicionais (arts. 46–57 LC 214/2025). Este diagnóstico usa estimativas conservadoras. Um levantamento completo com seu contador pode revelar créditos maiores.
+        <b>Lucro Real:</b> seu regime tem regras de crédito mais amplas — despesas operacionais e ativos imobilizados podem gerar créditos adicionais (arts. 46–57 LC 214/2025). Este diagnóstico usa estimativas conservadoras.
       </div>
     </div>`;
   }
-
-  // CORREÇÃO #13: Aviso especial para agronegócio
   if (setor === 'agro') {
-    alertas += `<div class="alert" style="background:var(--ouro-light);border-left:3px solid var(--ouro);margin-bottom:16px">
+    alertas += `<div class="alert" style="background:var(--ouro-light);border-left:3px solid var(--ouro);margin-bottom:14px">
       <span class="alert-icon">🌾</span>
       <div style="font-size:12px">
-        <b>Agronegócio — regime especial:</b> o setor tem tratamento diferenciado na LC 214/2025 (crédito presumido para produtor rural, regras específicas por atividade — art. 138 e Anexo IX). Este diagnóstico usa a estimativa geral de alíquota reduzida 60% (${pct(ALIQ.RED60)}). Produtor rural, cooperativa ou agroindústria podem ter cálculos muito diferentes. Consulte um contador especializado em tributação rural.
+        <b>Agronegócio — regime especial:</b> tratamento diferenciado na LC 214/2025 (crédito presumido para produtor rural, art. 138 e Anexo IX). Este diagnóstico usa alíquota reduzida 60% (${pct(ALIQ.RED60)}). Produtor rural, cooperativa ou agroindústria podem ter cálculos muito diferentes. Consulte um contador especializado.
       </div>
     </div>`;
   }
-
   if (aliq === ALIQ.RED60 && setor !== 'agro') {
-    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:16px">
+    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:14px">
       <span class="alert-icon">✓</span>
       <div style="font-size:12px">
-        <b>Alíquota reduzida 60%:</b> seu setor (${SETOR_LABEL[setor]}) tem alíquota de referência ${pct(aliq)} em vez de ${pct(ALIQ.CHEIA)}.
-        Garanta que o código CBS/IBS correto esteja parametrizado nas NFs para manter o benefício (arts. 82–138 LC 214/2025).
+        <b>Alíquota reduzida 60%:</b> ${SETOR_LABEL[setor]} tem alíquota de referência ${pct(aliq)} em vez de ${pct(ALIQ.CHEIA)}. Garanta que o código CBS/IBS correto esteja parametrizado nas NFs (arts. 82–138 LC 214/2025).
       </div>
     </div>`;
   } else if (aliq === ALIQ.RED30) {
-    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:16px">
+    alertas += `<div class="alert" style="background:var(--success-light);border-left:3px solid var(--success);margin-bottom:14px">
       <span class="alert-icon">✓</span>
       <div style="font-size:12px">
-        <b>Alíquota reduzida 30%:</b> ${SETOR_LABEL[setor]} pode ter alíquota de ${pct(aliq)} se a empresa for composta por profissionais habilitados exercendo exclusivamente a atividade regulamentada (art. 127 LC 214/2025).
-        Verifique o enquadramento com seu contador.
+        <b>Alíquota reduzida 30%:</b> ${SETOR_LABEL[setor]} pode ter alíquota de ${pct(aliq)} se composta por profissionais habilitados (art. 127 LC 214/2025). Verifique o enquadramento com seu contador.
       </div>
     </div>`;
   }
 
   // ── Barras ────────────────────────────────────────────────────────────────
-  //
-  // CORREÇÃO #6: Barras mostram valores de CBS/IBS (impacto tributário),
-  // não valores brutos de input. Folha exibe o custo CBS/IBS não recuperável,
-  // não o valor da folha em si.
   const bars = isSimplesDAS
     ? [
-        { label: 'Perda competitiva B2B/mês', val: perdMes,      cls: 'bf-red'   },
-        { label: 'Custo CBS/IBS sobre folha', val: folhaImpacto, cls: 'bf-blue'  },
+        { label: 'Perda competitiva B2B/mês', val: perdMes,      cls: 'bf-red'  },
+        { label: 'CBS/IBS sobre folha',        val: folhaImpacto, cls: 'bf-blue' },
       ]
     : [
         { label: 'Retido pelo split payment', val: splitMes,      cls: 'bf-red'   },
         { label: 'Crédito recuperável / mês', val: credMes,       cls: 'bf-green' },
         { label: 'Débito líquido / mês',      val: debitoLiqMes,  cls: 'bf-amber' },
-        { label: 'CBS/IBS não recuperável\n(folha)', val: folhaImpacto, cls: 'bf-blue' },
+        { label: 'CBS/IBS s/ folha\n(sem crédito)', val: folhaImpacto, cls: 'bf-blue' },
       ];
-
   const maxB = Math.max(...bars.map(b => b.val), 1);
 
   // ── Insights ──────────────────────────────────────────────────────────────
   const insights = [];
-
   if (isSimples) {
-    insights.push({
-      ico:'⇄', title:'Avalie o Simples Híbrido a partir de 2027', tag:'Avaliar mudança de regime', tagCls:'tag-red',
-      text:`A LC 214/2025 criou o Simples Híbrido: recolher IBS/CBS fora do DAS, gerando crédito integral para clientes B2B. Se mais de 30% das suas vendas são para empresas do regime regular, a análise é obrigatória. A decisão é semestral e irrevogável.`,
-    });
+    insights.push({ ico:'⇄', title:'Avalie o Simples Híbrido a partir de 2027', tag:'Avaliar mudança de regime', tagCls:'tag-red',
+      text:`A LC 214/2025 criou o Simples Híbrido: recolher IBS/CBS fora do DAS, gerando crédito integral para clientes B2B. Se mais de 30% das suas vendas são para empresas do regime regular, a análise é obrigatória. A decisão é semestral e irrevogável para cada período.` });
   }
-
   if (!isSimplesDAS && forn === 'simples') {
-    insights.push({
-      ico:'🔗', title:'Monitore a decisão dos seus fornecedores do Simples', tag:'Prioridade', tagCls:'tag-amber',
-      // CORREÇÃO #3: Insight reformulado — não é "migrar fornecedor", é monitorar a opção pelo Híbrido
-      text:`Seus fornecedores do Simples que permanecerem no DAS padrão não gerarão crédito CBS/IBS para você. A partir de 2027, eles poderão optar pelo Simples Híbrido e passar a destacar CBS/IBS nas NFs. Acompanhe essa decisão — pode representar até ${brl((comp + serv) * 0.65 * aliq)}/mês em créditos recuperáveis.`,
-    });
+    insights.push({ ico:'🔗', title:'Monitore a decisão dos seus fornecedores do Simples', tag:'Prioridade', tagCls:'tag-amber',
+      text:`Seus fornecedores do Simples que permanecerem no DAS padrão não gerarão crédito CBS/IBS para você. A partir de 2027, eles poderão optar pelo Simples Híbrido e passar a destacar CBS/IBS nas NFs. Acompanhe essa decisão — pode representar até ${brl((comp + serv) * 0.65 * aliq)}/mês em créditos recuperáveis.` });
   }
-
   if (!isSimplesDAS) {
-    insights.push({
-      ico:'📄', title:'Parametrize CBS/IBS no ERP agora', tag:'Ajuste no sistema', tagCls:'tag-blue',
-      text:`Desde jan/2026, NFs devem destacar CBS/IBS (alíquotas-teste: CBS 0,9% + IBS 0,1%). Sem parametrização correta, cada NF com campo errado cancela o direito ao crédito daquela operação quando o regime pleno entrar. Audite os últimos 3 meses de emissão.`,
-    });
+    insights.push({ ico:'📄', title:'Parametrize CBS/IBS no ERP agora', tag:'Ajuste no sistema', tagCls:'tag-blue',
+      text:`Desde jan/2026, NFs devem destacar CBS/IBS (alíquotas-teste: CBS 0,9% + IBS 0,1%). Sem parametrização correta, cada NF emitida errada cancela o direito ao crédito daquela operação quando o regime pleno entrar. Audite os últimos 3 meses.` });
   }
-
   if (!isSimplesDAS && saldoCreedor > 0) {
-    insights.push({
-      ico:'💰', title:'Você tem saldo credor potencial', tag:'Dinheiro a recuperar', tagCls:'tag-blue',
-      text:`Seu crédito recuperável (${brl(credMes)}/mês) supera o split retido (${brl(splitMes)}/mês). Isso gera saldo credor de ${brl(saldoCreedor)}/mês — que pode ser ressarcido ou compensado com outros tributos. Garanta que os processos de recuperação estejam ativos.`,
-    });
+    insights.push({ ico:'💰', title:'Você tem saldo credor potencial', tag:'Dinheiro a recuperar', tagCls:'tag-blue',
+      text:`Seu crédito recuperável (${brl(credMes)}/mês) supera o split retido (${brl(splitMes)}/mês). Isso gera saldo credor de ${brl(saldoCreedor)}/mês — que pode ser ressarcido ou compensado com outros tributos. Garanta que os processos de recuperação estejam ativos.` });
   }
-
-  insights.push({
-    ico:'📋', title:'Auditoria preventiva de NFs', tag:'Prioridade', tagCls:'tag-amber',
-    // CORREÇÃO #8: Estatística reformulada sem atribuição anacrônica ao IBPT para CBS/IBS
-    text:`Erros na apuração tributária são a regra, não a exceção nas PMEs brasileiras. Com o split payment ativo desde maio/2026, NFs com dados incorretos (CST, alíquota, NCM) significam créditos perdidos e caixa retido aguardando ressarcimento — o que pode levar meses. Uma auditoria agora evita o acúmulo.`,
-  });
+  insights.push({ ico:'📋', title:'Auditoria preventiva de NFs', tag:'Prioridade', tagCls:'tag-amber',
+    text:`Erros na apuração tributária são a regra nas PMEs brasileiras. Com o split payment ativo desde maio/2026, NFs com dados incorretos (CST, alíquota, NCM) significam créditos perdidos e caixa retido aguardando ressarcimento — o que pode levar meses. Uma auditoria agora evita o acúmulo.` });
 
   // ── KPIs ──────────────────────────────────────────────────────────────────
-  //
-  // CORREÇÃO #7: KPI de "crédito perdido" agora inclui nota metodológica.
-  const perdAnoLabel = isSimplesDAS
-    ? 'Perda competitiva / ano'
-    : 'Crédito potencial perdido / ano';
-  const perdAnoSub = isSimplesDAS
+  const perdAnoLabel = isSimplesDAS ? 'Perda competitiva / ano' : 'Crédito potencial perdido / ano';
+  const perdAnoSub   = isSimplesDAS
     ? 'Pressão acumulada sobre preços e contratos B2B com clientes do regime regular'
-    : `Estimativa: ${isLucroReal ? '15%' : '15%'} do crédito recuperável perdido por erros em NF-e (CST, alíquota, NCM). Benchmark de mercado; varia conforme ERP.`;
+    : `Estimativa: 15% do crédito recuperável perdido por erros em NF-e (CST, alíquota, NCM). Benchmark de mercado; varia conforme ERP.`;
 
   const kpiHtml = isSimplesDAS
     ? `<div class="kpi-grid">
@@ -792,54 +853,44 @@ function buildResults() {
         </div>
       </div>`;
 
-  // ── Próximos passos concretos ─────────────────────────────────────────────
-  //
-  // CORREÇÃO #11: Seção de próximos passos para PMEs sem ERP,
-  // em vez de CTAs quebrados como único caminho.
+  // ── Próximos passos ───────────────────────────────────────────────────────
   const nextStepsHtml = isSimplesDAS
     ? `<div class="next-steps">
         <div class="next-steps-title">O que fazer agora</div>
-        <div class="next-step-item">
-          <div class="next-step-num">1</div>
+        <div class="next-step-item"><div class="next-step-num">1</div>
           <div class="next-step-text"><strong>Mapeie suas vendas B2B.</strong> Estime qual percentual do seu faturamento vai para clientes PJ (Lucro Real/Presumido). Se passar de 30%, a análise do Simples Híbrido é urgente.</div>
         </div>
-        <div class="next-step-item">
-          <div class="next-step-num">2</div>
+        <div class="next-step-item"><div class="next-step-num">2</div>
           <div class="next-step-text"><strong>Converse com seu contador sobre o Simples Híbrido.</strong> A opção começa a valer a partir de 2027. A janela de decisão é semestral — não espere para entender o impacto.</div>
         </div>
-        <div class="next-step-item">
-          <div class="next-step-num">3</div>
+        <div class="next-step-item"><div class="next-step-num">3</div>
           <div class="next-step-text"><strong>Verifique se suas NFs estão emitindo os campos de CBS/IBS.</strong> Desde jan/2026, as alíquotas-teste devem constar nas NF-es. Um emissor desatualizado cria problema retroativo.</div>
         </div>
       </div>`
     : `<div class="next-steps">
         <div class="next-steps-title">O que fazer agora</div>
-        <div class="next-step-item">
-          <div class="next-step-num">1</div>
+        <div class="next-step-item"><div class="next-step-num">1</div>
           <div class="next-step-text"><strong>Audite as NF-es dos últimos 3 meses.</strong> Verifique se CBS 0,9% e IBS 0,1% estão destacados corretamente. ${isLucroReal ? 'Para Lucro Real, confira também o CIAP para créditos de ativo imobilizado.' : 'Para Lucro Presumido, confirme se o regime de crédito está corretamente configurado.'} Sem isso, créditos são perdidos.</div>
         </div>
-        <div class="next-step-item">
-          <div class="next-step-num">2</div>
+        <div class="next-step-item"><div class="next-step-num">2</div>
           <div class="next-step-text"><strong>Prepare o caixa para o split payment.</strong> Já ativo desde maio/2026 (Decreto 12.955/2026): o CBS/IBS é retido na liquidação (Pix, boleto, TED). Se não estava previsto no fluxo de caixa, ajuste agora.</div>
         </div>
-        <div class="next-step-item">
-          <div class="next-step-num">3</div>
-          <div class="next-step-text"><strong>Parametrize o ERP (ou emissor de NF) para as alíquotas corretas.</strong> Mesmo sem sistema avançado, qualquer emissor de NF-e precisa ter CBS e IBS configurados por NCM/serviço. Não deixe para 2027.</div>
+        <div class="next-step-item"><div class="next-step-num">3</div>
+          <div class="next-step-text"><strong>Parametrize o ERP para as alíquotas corretas.</strong> Mesmo sem sistema avançado, qualquer emissor de NF-e precisa ter CBS e IBS configurados por NCM/serviço. Não deixe para 2027.</div>
         </div>
-        <div class="next-step-item">
-          <div class="next-step-num">4</div>
+        <div class="next-step-item"><div class="next-step-num">4</div>
           <div class="next-step-text"><strong>Consulte a <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm" target="_blank" rel="noopener" style="color:var(--brasa)">LC 214/2025</a> com seu contador</strong> para confirmar a alíquota exata do seu setor e verificar reduções ou regimes especiais aplicáveis.</div>
         </div>
       </div>`;
 
-  // ── Render final ──────────────────────────────────────────────────────────
+  // ── Render ────────────────────────────────────────────────────────────────
   document.getElementById('results-body').innerHTML = `
     <div class="company-tag">🏢 ${nome} · ${SETOR_LABEL[setor]||setor} · ${REG_LABEL[regime]||regime}</div>
     ${alertas}
     <div class="section-label">Impacto estimado — regime pleno (2033+)</div>
     ${kpiHtml}
     <hr class="divider">
-    <div class="section-label">Detalhamento do fluxo CBS/IBS (valores de imposto, não base)</div>
+    <div class="section-label">Detalhamento do fluxo CBS/IBS</div>
     ${bars.map(b => `
       <div class="bar-row">
         <div class="bar-name">${b.label.replace('\n','<br>')}</div>
@@ -866,6 +917,13 @@ function buildResults() {
         <button class="btn-cta-s" onclick="trackCTA('email')">Receber relatório por e-mail</button>
       </div>
     </div>`;
+
+  if (typeof posthog !== 'undefined') posthog.capture('diagnostico_completado', {
+    regime: D.regime, setor: D.setor,
+    split_mes: Math.round(splitMes), cred_mes: Math.round(credMes),
+    perd_ano: Math.round(perdAno), chips: D.chips,
+    tem_openq: D.openQ.length > 0,
+  });
 }
 
 function trackCTA(type) {
@@ -874,12 +932,6 @@ function trackCTA(type) {
     ? 'Em breve! Deixe seu e-mail em oi@apurai.com.br e avisamos quando a integração estiver disponível.'
     : 'Em breve! Envie seu e-mail para oi@apurai.com.br para receber o relatório completo.');
 }
-
-document.querySelector('.hero-cta').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('diagnostico').scrollIntoView({ behavior: 'smooth' });
-  if (typeof posthog !== 'undefined') posthog.capture('hero_cta_clicked');
-});
 </script>
 </body>
 </html>
